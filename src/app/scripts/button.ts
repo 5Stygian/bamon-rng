@@ -19,24 +19,30 @@ function _calculateEP(): void { // use this to recalculate EP (only should be us
 }
 
 const NumberAttributes: Record<string, Attribute> = {
-  "CUBE": ["CUBE", 990100],
-  "EVEN": ["EVEN", 200],
-  "ODD": ["ODD", 200],
-  "SQUARE": ["SQUARE", 99901],
-  "SINGLE": ['SINGLE DIGIT', 10_000_000],
-  "DOUBLE": ['two digit', 1_111_112],
-  "TRIPLE": ['three digit', 111_112],
-  "QUAD": ['four digit', 11_112],
-  "QUINT": ['five digit', 1_112],
-  "HEXA": ['six digit', 112],
-  "HEPT": ['seven digit', 100_000_000],
-  "BLACKJACK": ['blackjack', 2_522],
-  "PAIR": ['pair', 249],
-  "THREEK": ['three of a kind', 2_784],
-  "FOURK": ['four of a kind', 37_024],
-  "FIVEK": ['yahtzee', 552_487],
-  "SIXK": ['six of a kind', 10_000_000],
-  "SEVENK": ['seven of a kind', 0] // impossible on 0-1_000_000
+  CUBE: ["CUBE", 500],
+  EVEN: ["EVEN", 200],
+  ODD: ["ODD", 200],
+  SQUARE: ["SQUARE", 300],
+  SINGLE: ["SINGLE DIGIT", 2000],
+  DOUBLE: ["TWO DIGIT", 1000],
+  TRIPLE: ["THREE DIGIT", 1000],
+  QUAD: ["FOUR DIGIT", 1000],
+  QUINT: ["FIVE DIGIT", 500],
+  HEXA: ["SIX DIGIT", 300],
+  HEPT: ["SEVEN DIGIT", 1000],
+  BLACKJACK: ["BLACKJACK", 400],
+  PAIR: ["PAIR", 300],
+  THREEK: ["THREE OF A KIND", 300],
+  FOURK: ["FOUR OF A KIND", 300],
+  FIVEK: ["YAHTZEE", 300],
+  SIXK: ["SIX OF A KIND", 300],
+  SEVENK: ["SEVEN OF A KIND", 300],
+  ASCP: ["2 ACENDING", 300],
+  ASCT: ["3 ASC", 500],
+  ASCFO: ["4 ASC", 700],
+  ASCFI: ["5 ASC", 1000],
+  ASCSI: ["6 ASC", 1500],
+  ASCSE: ["7 ASC", 2500],
 };
 
 class RandomNumber {
@@ -102,6 +108,36 @@ class RandomNumber {
         break;
     }
 
+    let count = 0;
+    let num = this._value.toString();
+    for (let i = 1; i < num.length; i++) {
+      if (num[i] - 1 == num[i-1]) {
+        count++;
+      }
+    }
+
+    switch (count) {
+      case 0:
+        break;
+      case 1: 
+        this.addAttribute(NumberAttributes.ASCP);
+        break;
+      case 2:
+        this.addAttribute(NumberAttributes.ASCT);
+        break;
+      case 3:
+        this.addAttribute(NumberAttributes.ASCFO);
+        break;
+      case 4:
+        this.addAttribute(NumberAttributes.ASCFI);
+        break;
+      case 5:
+        this.addAttribute(NumberAttributes.ASCSI);
+        break;
+      case 6:
+        this.addAttribute(NumberAttributes.ASCSE);
+        break;
+    
     let sum: number = 0;
     for (let i = 0; i < this._value.toString().length; i++) {
       sum += parseInt(this._value.toString()[i], 10);
