@@ -93,7 +93,7 @@ class RandomNumber {
     let count = 0;
     let num = this._value.toString();
     for (let i = 1; i < num.length; i++) {
-      if ((num[i] as number) - 1 === num[i-1] as number) {
+      if ((num[i] as any) - 1 === num[i-1] as any) {
         count++;
       }
     }
