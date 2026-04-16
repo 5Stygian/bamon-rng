@@ -20,6 +20,12 @@ const NumberAttributes: Record<string, Attribute> = {
   FIVEK: ["YAHTZEE", 300],
   SIXK: ["SIX OF A KIND", 300],
   SEVENK: ["SEVEN OF A KIND", 300],
+  ASCP: ["2 ACENDING", 300],
+  ASCT: ["3 ASC", 500],
+  ASCFO: ["4 ASC", 700],
+  ASCFI: ["5 asc", 1000],
+  ASCSI: ["6 asc", 1500],
+  ASCSE: ["7 asc", 2500],
 };
 
 class RandomNumber {
@@ -85,6 +91,36 @@ class RandomNumber {
         break;
     }
 
+    let count = 0;
+    let num = this._value.toString();
+    for (let i = 1; i < num.length; i++) {
+      if (num[i] - 1 == num[i-1]) {
+        count++;
+      }
+    }
+
+    switch (count) {
+      case 0:
+        break;
+      case 1: 
+        this.addAttribute(NumberAttributes.ASCP);
+        break;
+      case 2:
+        this.addAttribute(NumberAttributes.ASCT);
+        break;
+      case 3:
+        this.addAttribute(NumberAttributes.ASCFO);
+        break;
+      case 4:
+        this.addAttribute(NumberAttributes.ASCFI);
+        break;
+      case 5:
+        this.addAttribute(NumberAttributes.ASCSI);
+        break;
+      case 6:
+        this.addAttribute(NumberAttributes.ASCSE);
+        break;
+    
     let sum: number = 0;
     for (let i = 0; i < this._value.toString().length; i++) {
       sum += parseInt(this._value.toString()[i], 10);
