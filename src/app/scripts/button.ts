@@ -24,20 +24,20 @@ const NumberAttributes: Record<string, Attribute> = {
   ODD: ["ODD", 200],
   SQUARE: ["SQUARE", 99901],
   SINGLE: ['SINGLE DIGIT', 10_000_000],
-  DOUBLE: ['two digit', 1_111_112],
-  TRIPLE: ['three digit', 111_112],
-  QUAD: ['four digit', 11_112],
-  QUINT: ['five digit', 1_112],
-  HEXA: ['six digit', 112],
-  HEPT: ['seven digit', 100_000_000],
-  BLACKJACK: ['blackjack', 2_522],
-  PAIR: ['pair', 249],
-  THREEK: ['three of a kind', 2_784],
-  FOURK: ['four of a kind', 37_024],
-  FIVEK: ['yahtzee', 552_487],
-  SIXK: ['six of a kind', 10_000_000],
-  SEVENK: ['seven of a kind', 0], // impossible on 0-1_000_000
-  ASC2: ["2 ASCENDING", 300],
+  DOUBLE: ['TWO DIGITS', 1_111_112],
+  TRIPLE: ['THREE DIGITS', 111_112],
+  QUAD: ['FOUR DIGITS', 11_112],
+  QUINT: ['FIVE DIGITS', 1_112],
+  HEXA: ['SIX DIGITS', 112],
+  HEPT: ['SEVEN DIGITS', 100_000_000],
+  BLACKJACK: ['BLACKJACK', 2_522],
+  PAIR: ['PAIR', 249],
+  THREEK: ['THREE OF A KIND', 2_784],
+  FOURK: ['FOUR OF A KIND', 37_024],
+  FIVEK: ['YAHTZEE', 552_487],
+  SIXK: ['SIX OF A KIND', 10_000_000],
+  SEVENK: ['SEVEN OF A KIND', 0], // impossible on 0-1_000_000
+  ASC2: ["2 ASC", 300],
   ASC3: ["3 ASC", 500],
   ASC4: ["4 ASC", 700],
   ASC5: ["5 ASC", 1000],
@@ -243,10 +243,17 @@ class RandomNumber {
   }
 }
 
-function roll() {
+export default function roll() {
+  const numberDisplay = document.getElementById("NumberDisplay");
+  const attributeDisplay = document.getElementById("AttributeDisplay");
+  const epDisplay = document.getElementById("EPDisplay");
 
   const number: RandomNumber = new RandomNumber();
-  number.value = 1234567;
+
+  numberDisplay!.innerHTML = number.value as any;
+  attributeDisplay!.innerHTML = number.getAttrNamesAsFormattedString();
+  epDisplay!.innerHTML = number.getEP() as any;
+
   console.log(number.value, number.getAttrNames(), number.getEP());
 
   // for (let i of [1,10,100,1000,10000,100000,1000000]) {
@@ -254,4 +261,5 @@ function roll() {
   //   console.log(number.value, number.attributes);
   // }
 }
-roll();
+
+//roll();
