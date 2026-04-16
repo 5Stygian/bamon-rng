@@ -169,7 +169,7 @@ export default function roll() {
 
   const number: RandomNumber = new RandomNumber();
 
-  numberDisplay!.innerHTML = number.value;
+  numberDisplay!.innerHTML = number.value as string;
   attributeDisplay!.innerHTML = number.getAttrNamesAsFormattedString();
   epDisplay!.innerHTML = number.getEP();
 
