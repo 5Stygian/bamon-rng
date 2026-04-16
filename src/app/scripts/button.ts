@@ -169,9 +169,9 @@ export default function roll() {
 
   const number: RandomNumber = new RandomNumber();
 
-  numberDisplay.innerHTML = number.value;
-  attributeDisplay.innerHTML = number.getAttrNamesAsFormattedString();
-  epDisplay.innerHTML = number.getEP();
+  numberDisplay!.innerHTML = number.value;
+  attributeDisplay!.innerHTML = number.getAttrNamesAsFormattedString();
+  epDisplay!.innerHTML = number.getEP();
 
   console.log(number.value, number.getAttrNames(), number.getEP());
 
