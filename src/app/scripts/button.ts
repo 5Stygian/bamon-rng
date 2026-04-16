@@ -111,7 +111,7 @@ class RandomNumber {
     let count = 0;
     let num = this._value.toString();
     for (let i = 1; i < num.length; i++) {
-      if (parseInt(num[i] - 1, 10) === parseInt(num[i-1],10)) {
+      if ((num[i] as number) - 1 === num[i-1] as number) {
         count++;
       }
     }
