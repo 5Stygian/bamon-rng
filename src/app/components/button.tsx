@@ -2,7 +2,7 @@
 
 import roll from "../scripts/button";
 
-export default function rollButton() {
+export default function RollButton() {
   return (
     <button onClick={roll} type="button">
       roll

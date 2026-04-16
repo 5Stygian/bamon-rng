@@ -7,19 +7,19 @@ const NumberAttributes: Record<string, Attribute> = {
   "ODD": ["ODD", 200],
   "SQUARE": ["SQUARE", 300],
   "SINGLE": ['SINGLE DIGIT', 2000],
-  "DOUBLE": ['two digit', 1000],
-  "TRIPLE": ['three digit', 1000],
-  "QUAD": ['four digit', 1000],
-  "QUINT": ['five digit', 500],
-  "HEXA": ['six digit', 300],
-  "HEPT": ['seven digit', 1000],
-  "BLACKJACK": ['blackjack', 400],
-  "PAIR": ['pair', 300],
-  "THREEK": ['three of a kind', 300],
-  "FOURK": ['four of a kind', 300],
-  "FIVEK": ['yahtzee', 300],
-  "SIXK": ['six of a kind', 300],
-  "SEVENK": ['seven of a kind', 300]
+  "DOUBLE": ['TWO DIGIT', 1000],
+  "TRIPLE": ['THREE DIGIT', 1000],
+  "QUAD": ['FOUR DIGIT', 1000],
+  "QUINT": ['FIVE DIGIT', 500],
+  "HEXA": ['SIX DIGIT', 300],
+  "HEPT": ['SEVEN DIGIT', 1000],
+  "BLACKJACK": ['BLACKJACK', 400],
+  "PAIR": ['PAIR', 300],
+  "THREEK": ['THREE OF A KIND', 300],
+  "FOURK": ['FOUR OF A KIND', 300],
+  "FIVEK": ['YAHTZEE', 300],
+  "SIXK": ['SIX OF A KIND', 300],
+  "SEVENK": ['SEVEN OF A KIND', 300]
 }
 
 class RandomNumber {
@@ -38,7 +38,7 @@ class RandomNumber {
     this.checkForAttributes();
   }
 
-  public checkForAttributes(): void {
+  private checkForAttributes(): void {
     // check if this.value is even or odd
     if (this.value % 2) {
       this.addAttribute(NumberAttributes.ODD);
@@ -107,7 +107,7 @@ class RandomNumber {
 
   }
 
-  private addAttribute(attr: [string, number]): void {
+  private addAttribute(attr: Attribute): void {
     this.attributes.push(attr);
   }
 
@@ -125,6 +125,18 @@ class RandomNumber {
       attrNames.push(i[0]);
     }
     return attrNames;
+  }
+
+  public getAttrNamesAsFormattedString(): string {
+    let attrsAsString: string = "";
+    for (let attr of this.attributes) {
+      attrsAsString += `${attr[0]}, `;
+    }
+
+    // removes the trailing comma
+    attrsAsString = attrsAsString.slice(0, -2);
+
+    return attrsAsString;
   }
 
   get value(): number {
@@ -145,12 +157,20 @@ class RandomNumber {
 
 
 export default function roll() {
-    const number: RandomNumber = new RandomNumber();
+  const numberDisplay = document.getElementById("NumberDisplay");
+  const attributeDisplay = document.getElementById("AttributeDisplay");
+  const epDisplay = document.getElementById("EPDisplay");
 
-    console.log(number.value, number.getAttrNames(), number.getEP());
+  const number: RandomNumber = new RandomNumber();
 
-    // for (let i of [1,10,100,1000,10000,100000,1000000]) {
-    //   number.value = i;
-    //   console.log(number.value, number.attributes);
-    // }
+  numberDisplay.innerHTML = number.value;
+  attributeDisplay.innerHTML = number.getAttrNamesAsFormattedString();
+  epDisplay.innerHTML = number.getEP();
+
+  console.log(number.value, number.getAttrNames(), number.getEP());
+
+  // for (let i of [1,10,100,1000,10000,100000,1000000]) {
+  //   number.value = i;
+  //   console.log(number.value, number.attributes);
+  // }
 }

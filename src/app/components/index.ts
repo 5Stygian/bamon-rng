@@ -1,3 +1,4 @@
-import rollButton from "./button";
+import RollButton from "./button";
+import NumberDisplay from "./numberDisplay";
 
-export { rollButton };
+export { RollButton, NumberDisplay };
