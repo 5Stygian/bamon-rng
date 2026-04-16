@@ -1,4 +1,5 @@
-import * as c from "./components";
+import * as c from "./components/index";
+
 export default function Index() {
   return (
     <div>

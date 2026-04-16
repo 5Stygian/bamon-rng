@@ -1,3 +1,3 @@
 import rollButton from "./button";
 
-export {rollButton};
+export { rollButton };
