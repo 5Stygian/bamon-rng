@@ -171,7 +171,7 @@ export default function roll() {
 
   numberDisplay!.innerHTML = number.value as any;
   attributeDisplay!.innerHTML = number.getAttrNamesAsFormattedString();
-  epDisplay!.innerHTML = number.getEP();
+  epDisplay!.innerHTML = number.getEP() as any;
 
   console.log(number.value, number.getAttrNames(), number.getEP());
 
