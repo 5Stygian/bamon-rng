@@ -96,7 +96,7 @@ class RandomNumber {
     let count = 0;
     let num = this._value.toString();
     for (let i = 1; i < num.length; i++) {
-      if (num[i] - 1 == num[i-1]) {
+      if (parseInt(num[i] - 1, 10) === num[i-1]) {
         count++;
       }
     }
