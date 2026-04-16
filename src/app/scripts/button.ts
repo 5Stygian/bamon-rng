@@ -122,7 +122,7 @@ class RandomNumber {
       case 6:
         this.addAttribute(NumberAttributes.ASCSE);
         break;
-    
+    }
     let sum: number = 0;
     for (let i = 0; i < this._value.toString().length; i++) {
       sum += parseInt(this._value.toString()[i], 10);
