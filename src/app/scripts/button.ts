@@ -2,41 +2,23 @@
 
 type Attribute = [string, number];
 
-// EP = 100_000_000/(amount of numbers with that property)
-function _calculateEP(): void {
-  const number: RandomNumber = new RandomNumber();
-  for (let j = 0; j < Object.keys(NumberAttributes).length; j++) {
-    let jkey: string = Object.keys(NumberAttributes)[j];
-    let quantity: number = 0;
-    for (let i = 0; i <= 1_000_000; i++) {
-      number.value = i;
-      if (number.getAttrNames().includes(NumberAttributes[jkey][0])) {
-        quantity += 1;
-      }
-    }
-    console.log(NumberAttributes[jkey][0], Math.ceil(100_000_000/quantity));
-  }
-}
-
 const NumberAttributes: Record<string, Attribute> = {
-  CUBE: ["CUBE", 990100],
-  EVEN: ["EVEN", 200],
-  ODD: ["ODD", 200],
-  SQUARE: ["SQUARE", 99901],
-  SINGLE: ['SINGLE DIGIT', 10_000_000],
-  DOUBLE: ['two digit', 1_111_112],
-  TRIPLE: ['three digit', 111_112],
-  QUAD: ['four digit', 11_112],
-  QUINT: ['five digit', 1_112],
-  HEXA: ['six digit', 112],
-  HEPT: ['seven digit', 100_000_000],
-  BLACKJACK: ['blackjack', 2_522],
-  PAIR: ['pair', 249],
-  THREEK: ['three of a kind', 2_784],
-  FOURK: ['four of a kind', 37_024],
-  FIVEK: ['yahtzee', 552_487],
-  SIXK: ['six of a kind', 10_000_000],
-  SEVENK: ['seven of a kind', 0], // impossible on 0-1_000_000
+  CUBE: ["CUBE", 300],
+  SQUARE: ["SQUARE", 300],
+  SINGLE: ["SINGLE DIGIT", 2000],
+  DOUBLE: ["TWO DIGIT", 1000],
+  TRIPLE: ["THREE DIGIT", 1000],
+  QUAD: ["FOUR DIGIT", 1000],
+  QUINT: ["FIVE DIGIT", 500],
+  HEXA: ["SIX DIGIT", 300],
+  HEPT: ["SEVEN DIGIT", 1000],
+  BLACKJACK: ["BLACKJACK", 400],
+  PAIR: ["PAIR", 300],
+  THREEK: ["THREE OF A KIND", 300],
+  FOURK: ["FOUR OF A KIND", 300],
+  FIVEK: ["YAHTZEE", 300],
+  SIXK: ["SIX OF A KIND", 300],
+  SEVENK: ["SEVEN OF A KIND", 300],
   ASCP: ["2 ASCENDING", 300],
   ASCT: ["3 ASC", 500],
   ASCFO: ["4 ASC", 700],
