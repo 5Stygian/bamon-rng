@@ -2,21 +2,6 @@
 
 type Attribute = [string, number];
 
-// EP = 100_000_000/(amount of numbers with that property)
-function _calculateEP(): void { // use this to recalculate EP (only should be used when adding a new badge to the record)
-  const number: RandomNumber = new RandomNumber();
-  for (let j = 0; j < Object.keys(NumberAttributes).length; j++) {
-    let jkey: string = Object.keys(NumberAttributes)[j];
-    let quantity: number = 0;
-    for (let i = 0; i <= 1_000_000; i++) {
-      number.value = i;
-      if (number.getAttrNames().includes(NumberAttributes[jkey][0])) {
-        quantity += 1;
-      }
-    }
-    console.log(NumberAttributes[jkey][0], Math.ceil(100_000_000/quantity));
-  }
-}
 
 const NumberAttributes: Record<string, Attribute> = {
   CUBE: ["CUBE", 500],
