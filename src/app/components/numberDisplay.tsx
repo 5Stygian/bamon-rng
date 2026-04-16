@@ -1,6 +1,6 @@
 export default function NumberDisplay() {
   return (
-    <div>
+    <div id="NumberDisplayOuter">
       <div id="NumberDisplay">0</div>
       <div id="AttributeDisplay" />
       <div>
