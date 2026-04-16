@@ -22,7 +22,7 @@ const NumberAttributes: Record<string, Attribute> = {
   FIVEK: ["YAHTZEE", 300],
   SIXK: ["SIX OF A KIND", 300],
   SEVENK: ["SEVEN OF A KIND", 300],
-  ASCP: ["2 ACENDING", 300],
+  ASCP: ["2 ASCENDING", 300],
   ASCT: ["3 ASC", 500],
   ASCFO: ["4 ASC", 700],
   ASCFI: ["5 ASC", 1000],
