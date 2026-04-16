@@ -1,6 +1,6 @@
 "use client";
 
-type Attribute = Array<string, number>;
+type Attribute = Array<string | number>;
 const NumberAttributes: Record<string, Attribute> = {
   CUBE: ["CUBE", 990100],
   EVEN: ["EVEN", 200],
