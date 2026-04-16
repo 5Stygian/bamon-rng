@@ -1,6 +1,7 @@
 "use client";
 
-const NumberAttributes: Record<string, [string,number]> = {
+type Attribute = Array<string, number>;
+const NumberAttributes: Record<string, Attribute> = {
   "CUBE": ["CUBE", 500],
   "EVEN": ["EVEN", 200],
   "ODD": ["ODD", 200],
@@ -22,7 +23,7 @@ const NumberAttributes: Record<string, [string,number]> = {
 }
 
 class RandomNumber {
-  public attributes: Array<[string, number]>;
+  public attributes: Array<Attribute>;
   private _value: number;
   private _digits: number;
   private _strvalue: string;
@@ -59,6 +60,7 @@ class RandomNumber {
       this.addAttribute(NumberAttributes.CUBE);
     }
 
+    // check the amount of digits
     switch (this._digits) {
         case (1):
             this.addAttribute(NumberAttributes.SINGLE);
