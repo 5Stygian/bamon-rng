@@ -2,25 +2,25 @@
 
 type Attribute = Array<string, number>;
 const NumberAttributes: Record<string, Attribute> = {
-  "CUBE": ["CUBE", 500],
-  "EVEN": ["EVEN", 200],
-  "ODD": ["ODD", 200],
-  "SQUARE": ["SQUARE", 300],
-  "SINGLE": ['SINGLE DIGIT', 2000],
-  "DOUBLE": ['TWO DIGIT', 1000],
-  "TRIPLE": ['THREE DIGIT', 1000],
-  "QUAD": ['FOUR DIGIT', 1000],
-  "QUINT": ['FIVE DIGIT', 500],
-  "HEXA": ['SIX DIGIT', 300],
-  "HEPT": ['SEVEN DIGIT', 1000],
-  "BLACKJACK": ['BLACKJACK', 400],
-  "PAIR": ['PAIR', 300],
-  "THREEK": ['THREE OF A KIND', 300],
-  "FOURK": ['FOUR OF A KIND', 300],
-  "FIVEK": ['YAHTZEE', 300],
-  "SIXK": ['SIX OF A KIND', 300],
-  "SEVENK": ['SEVEN OF A KIND', 300]
-}
+  CUBE: ["CUBE", 500],
+  EVEN: ["EVEN", 200],
+  ODD: ["ODD", 200],
+  SQUARE: ["SQUARE", 300],
+  SINGLE: ["SINGLE DIGIT", 2000],
+  DOUBLE: ["TWO DIGIT", 1000],
+  TRIPLE: ["THREE DIGIT", 1000],
+  QUAD: ["FOUR DIGIT", 1000],
+  QUINT: ["FIVE DIGIT", 500],
+  HEXA: ["SIX DIGIT", 300],
+  HEPT: ["SEVEN DIGIT", 1000],
+  BLACKJACK: ["BLACKJACK", 400],
+  PAIR: ["PAIR", 300],
+  THREEK: ["THREE OF A KIND", 300],
+  FOURK: ["FOUR OF A KIND", 300],
+  FIVEK: ["YAHTZEE", 300],
+  SIXK: ["SIX OF A KIND", 300],
+  SEVENK: ["SEVEN OF A KIND", 300],
+};
 
 class RandomNumber {
   public attributes: Array<Attribute>;
@@ -62,49 +62,57 @@ class RandomNumber {
 
     // check the amount of digits
     switch (this._digits) {
-        case (1):
-            this.addAttribute(NumberAttributes.SINGLE);
-            break;
-        case (2):
-            this.addAttribute(NumberAttributes.DOUBLE);
-            break;
-        case (3):
-            this.addAttribute(NumberAttributes.TRIPLE);
-            break;
-        case (4):
-            this.addAttribute(NumberAttributes.QUAD);
-            break;
-        case (5):
-            this.addAttribute(NumberAttributes.QUINT);
-            break;
-        case (6):
-            this.addAttribute(NumberAttributes.HEXA);
-            break;
-        case (7):
-            this.addAttribute(NumberAttributes.HEPT);
-            break;
+      case 1:
+        this.addAttribute(NumberAttributes.SINGLE);
+        break;
+      case 2:
+        this.addAttribute(NumberAttributes.DOUBLE);
+        break;
+      case 3:
+        this.addAttribute(NumberAttributes.TRIPLE);
+        break;
+      case 4:
+        this.addAttribute(NumberAttributes.QUAD);
+        break;
+      case 5:
+        this.addAttribute(NumberAttributes.QUINT);
+        break;
+      case 6:
+        this.addAttribute(NumberAttributes.HEXA);
+        break;
+      case 7:
+        this.addAttribute(NumberAttributes.HEPT);
+        break;
     }
 
-    let sum: number = 0
+    let sum: number = 0;
     for (let i = 0; i < this._value.toString().length; i++) {
-        sum += parseInt(this._value.toString()[i]);
-    } 
-    if (sum == 21) {
-        this.addAttribute(NumberAttributes.BLACKJACK);
+      sum += parseInt(this._value.toString()[i], 10);
+    }
+    if (sum === 21) {
+      this.addAttribute(NumberAttributes.BLACKJACK);
     }
 
     for (let i = 1; i < 7; i++) {
-            //only consecutive
-        if ((new RegExp('(.)(\\1{'+ i + ',})')).test(this._strvalue)) {
-            this.addAttribute([NumberAttributes.PAIR,NumberAttributes.THREEK,NumberAttributes.FOURK, NumberAttributes.FIVEK, NumberAttributes.SIXK, NumberAttributes.SEVENK][i - 1]);
-        }
-        
-        // not working
-        // if ((new RegExp('(?:(.).*?(\\1).*?){'+ i + ',}')).test(num.toString())) {
-        //     badges.push(i.toString());
-        // }
-    }
+      //only consecutive
+      if (new RegExp(`(.)(\\1{${i},})`).test(this._strvalue)) {
+        this.addAttribute(
+          [
+            NumberAttributes.PAIR,
+            NumberAttributes.THREEK,
+            NumberAttributes.FOURK,
+            NumberAttributes.FIVEK,
+            NumberAttributes.SIXK,
+            NumberAttributes.SEVENK,
+          ][i - 1],
+        );
+      }
 
+      // not working
+      // if ((new RegExp('(?:(.).*?(\\1).*?){'+ i + ',}')).test(num.toString())) {
+      //     badges.push(i.toString());
+      // }
+    }
   }
 
   private addAttribute(attr: Attribute): void {
@@ -113,23 +121,23 @@ class RandomNumber {
 
   public getEP(): number {
     let EP: number = 0;
-    for (let i of this.attributes) {
-      EP += i[1];
+    for (const attr of this.attributes) {
+      EP += attr[1];
     }
     return EP;
   }
 
   public getAttrNames(): Array<string> {
-    let attrNames: Array<string> = [];
-    for (let i of this.attributes) {
-      attrNames.push(i[0]);
+    const attrNames: Array<string> = [];
+    for (const attr of this.attributes) {
+      attrNames.push(attr[0]);
     }
     return attrNames;
   }
 
   public getAttrNamesAsFormattedString(): string {
     let attrsAsString: string = "";
-    for (let attr of this.attributes) {
+    for (const attr of this.attributes) {
       attrsAsString += `${attr[0]}, `;
     }
 
@@ -142,7 +150,7 @@ class RandomNumber {
   get value(): number {
     return this._value;
   }
-  
+
   set value(x: number) {
     this._value = x;
     this._strvalue = this._value.toString();
@@ -153,8 +161,6 @@ class RandomNumber {
     this.checkForAttributes();
   }
 }
-
-
 
 export default function roll() {
   const numberDisplay = document.getElementById("NumberDisplay");
