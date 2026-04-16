@@ -1,6 +1,6 @@
 "use client";
 
-import roll from "../scripts/button";
+import roll from "@/app/scripts/button";
 
 export default function RollButton() {
   return (
