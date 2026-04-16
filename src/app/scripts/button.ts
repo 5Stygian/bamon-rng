@@ -1,23 +1,6 @@
 "use client";
 
-type Attribute = [string, number];
-
-// EP = 100_000_000/(amount of numbers with that property)
-function _calculateEP(): void {
-  const number: RandomNumber = new RandomNumber();
-  for (let j = 0; j < Object.keys(NumberAttributes).length; j++) {
-    let jkey: string = Object.keys(NumberAttributes)[j];
-    let quantity: number = 0;
-    for (let i = 0; i <= 1_000_000; i++) {
-      number.value = i;
-      if (number.getAttrNames().includes(NumberAttributes[jkey][0])) {
-        quantity += 1;
-      }
-    }
-    console.log(NumberAttributes[jkey][0], Math.ceil(100_000_000/quantity));
-  }
-}
-
+type Attribute = Array<string, number>;
 const NumberAttributes: Record<string, Attribute> = {
   CUBE: ["CUBE", 990100],
   EVEN: ["EVEN", 200],
@@ -44,6 +27,22 @@ const NumberAttributes: Record<string, Attribute> = {
   ASC6: ["6 ASC", 1500],
   ASC7: ["7 ASC", 2500],
 };
+
+// EP = 100_000_000/(amount of numbers with that property)
+function _calculateEP(): void {
+  const number: RandomNumber = new RandomNumber();
+  for (let j = 0; j < Object.keys(NumberAttributes).length; j++) {
+    let jkey: string = Object.keys(NumberAttributes)[j];
+    let quantity: number = 0;
+    for (let i = 0; i <= 1_000_000; i++) {
+      number.value = i;
+      if (number.getAttrNames().includes(NumberAttributes[jkey][0])) {
+        quantity += 1;
+      }
+    }
+    console.log(NumberAttributes[jkey][0], Math.ceil(100_000_000/quantity));
+  }
+}
 
 class RandomNumber {
   public attributes: Array<Attribute>;
