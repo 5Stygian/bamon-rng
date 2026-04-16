@@ -2,29 +2,47 @@
 
 type Attribute = [string, number];
 
+// EP = 100_000_000/(amount of numbers with that property)
+function _calculateEP(): void {
+  const number: RandomNumber = new RandomNumber();
+  for (let j = 0; j < Object.keys(NumberAttributes).length; j++) {
+    let jkey: string = Object.keys(NumberAttributes)[j];
+    let quantity: number = 0;
+    for (let i = 0; i <= 1_000_000; i++) {
+      number.value = i;
+      if (number.getAttrNames().includes(NumberAttributes[jkey][0])) {
+        quantity += 1;
+      }
+    }
+    console.log(NumberAttributes[jkey][0], Math.ceil(100_000_000/quantity));
+  }
+}
+
 const NumberAttributes: Record<string, Attribute> = {
-  CUBE: ["CUBE", 300],
-  SQUARE: ["SQUARE", 300],
-  SINGLE: ["SINGLE DIGIT", 2000],
-  DOUBLE: ["TWO DIGIT", 1000],
-  TRIPLE: ["THREE DIGIT", 1000],
-  QUAD: ["FOUR DIGIT", 1000],
-  QUINT: ["FIVE DIGIT", 500],
-  HEXA: ["SIX DIGIT", 300],
-  HEPT: ["SEVEN DIGIT", 1000],
-  BLACKJACK: ["BLACKJACK", 400],
-  PAIR: ["PAIR", 300],
-  THREEK: ["THREE OF A KIND", 300],
-  FOURK: ["FOUR OF A KIND", 300],
-  FIVEK: ["YAHTZEE", 300],
-  SIXK: ["SIX OF A KIND", 300],
-  SEVENK: ["SEVEN OF A KIND", 300],
-  ASCP: ["2 ASCENDING", 300],
-  ASCT: ["3 ASC", 500],
-  ASCFO: ["4 ASC", 700],
-  ASCFI: ["5 ASC", 1000],
-  ASCSI: ["6 ASC", 1500],
-  ASCSE: ["7 ASC", 2500],
+  CUBE: ["CUBE", 990100],
+  EVEN: ["EVEN", 200],
+  ODD: ["ODD", 200],
+  SQUARE: ["SQUARE", 99901],
+  SINGLE: ['SINGLE DIGIT', 10_000_000],
+  DOUBLE: ['two digit', 1_111_112],
+  TRIPLE: ['three digit', 111_112],
+  QUAD: ['four digit', 11_112],
+  QUINT: ['five digit', 1_112],
+  HEXA: ['six digit', 112],
+  HEPT: ['seven digit', 100_000_000],
+  BLACKJACK: ['blackjack', 2_522],
+  PAIR: ['pair', 249],
+  THREEK: ['three of a kind', 2_784],
+  FOURK: ['four of a kind', 37_024],
+  FIVEK: ['yahtzee', 552_487],
+  SIXK: ['six of a kind', 10_000_000],
+  SEVENK: ['seven of a kind', 0], // impossible on 0-1_000_000
+  ASC2: ["2 ASCENDING", 300],
+  ASC3: ["3 ASC", 500],
+  ASC4: ["4 ASC", 700],
+  ASC5: ["5 ASC", 1000],
+  ASC6: ["6 ASC", 1500],
+  ASC7: ["7 ASC", 2500],
 };
 
 class RandomNumber {
@@ -93,8 +111,33 @@ class RandomNumber {
     let count = 0;
     let num = this._value.toString();
     for (let i = 1; i < num.length; i++) {
-      if ((num[i] as any) - 1 === num[i-1] as any) {
+      if (parseInt(num[i], 10) - 1 === parseInt(num[i-1],10)) {
         count++;
+        // move this into the else block if you don't want to get multiple ASC from one sequence
+        switch (count) {
+          case 0:
+            break;
+          case 1: 
+            this.addAttribute(NumberAttributes.ASC2);
+            break;
+          case 2:
+            this.addAttribute(NumberAttributes.ASC3);
+            break;
+          case 3:
+            this.addAttribute(NumberAttributes.ASC4);
+            break;
+          case 4:
+            this.addAttribute(NumberAttributes.ASC5);
+            break;
+          case 5:
+            this.addAttribute(NumberAttributes.ASC6);
+            break;
+          case 6:
+            this.addAttribute(NumberAttributes.ASC7);
+            break;
+        }
+      } else {
+        count = 0;
       }
     }
 
@@ -102,24 +145,25 @@ class RandomNumber {
       case 0:
         break;
       case 1: 
-        this.addAttribute(NumberAttributes.ASCP);
+        this.addAttribute(NumberAttributes.ASC2);
         break;
       case 2:
-        this.addAttribute(NumberAttributes.ASCT);
+        this.addAttribute(NumberAttributes.ASC3);
         break;
       case 3:
-        this.addAttribute(NumberAttributes.ASCFO);
+        this.addAttribute(NumberAttributes.ASC4);
         break;
       case 4:
-        this.addAttribute(NumberAttributes.ASCFI);
+        this.addAttribute(NumberAttributes.ASC5);
         break;
       case 5:
-        this.addAttribute(NumberAttributes.ASCSI);
+        this.addAttribute(NumberAttributes.ASC6);
         break;
       case 6:
-        this.addAttribute(NumberAttributes.ASCSE);
+        this.addAttribute(NumberAttributes.ASC7);
         break;
     }
+    
     let sum: number = 0;
     for (let i = 0; i < this._value.toString().length; i++) {
       sum += parseInt(this._value.toString()[i], 10);
@@ -151,7 +195,9 @@ class RandomNumber {
   }
 
   private addAttribute(attr: Attribute): void {
-    this.attributes.push(attr);
+    if (!this.attributes.includes(attr)) {
+      this.attributes.push(attr);
+    }
   }
 
   public getEP(): number {
@@ -197,17 +243,10 @@ class RandomNumber {
   }
 }
 
-export default function roll() {
-  const numberDisplay = document.getElementById("NumberDisplay");
-  const attributeDisplay = document.getElementById("AttributeDisplay");
-  const epDisplay = document.getElementById("EPDisplay");
+function roll() {
 
   const number: RandomNumber = new RandomNumber();
-
-  numberDisplay!.innerHTML = number.value as any;
-  attributeDisplay!.innerHTML = number.getAttrNamesAsFormattedString();
-  epDisplay!.innerHTML = number.getEP() as any;
-
+  number.value = 1234567;
   console.log(number.value, number.getAttrNames(), number.getEP());
 
   // for (let i of [1,10,100,1000,10000,100000,1000000]) {
@@ -215,3 +254,4 @@ export default function roll() {
   //   console.log(number.value, number.attributes);
   // }
 }
+roll();
