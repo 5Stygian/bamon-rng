@@ -20,12 +20,12 @@ const NumberAttributes: Record<string, Attribute> = {
   FIVEK: ['YAHTZEE', 552_487],
   SIXK: ['SIX OF A KIND', 10_000_000],
   SEVENK: ['SEVEN OF A KIND', 0], // impossible on 0-1_000_000
-  ASC2: ["2 ASC", 300],
-  ASC3: ["3 ASC", 500],
-  ASC4: ["4 ASC", 700],
-  ASC5: ["5 ASC", 1000],
-  ASC6: ["6 ASC", 1500],
-  ASC7: ["7 ASC", 2500],
+  ASC2: ["2 ASC", 272],
+  ASC3: ["3 ASC", 3467],
+  ASC4: ["4 ASC", 53192],
+  ASC5: ["5 ASC", 952381],
+  ASC6: ["6 ASC", 25000000],
+  ASC7: ["7 ASC", 0], // impossible on 0-1_000_000
 };
 
 // EP = 100_000_000/(amount of numbers with that property)
