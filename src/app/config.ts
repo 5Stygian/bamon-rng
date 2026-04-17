@@ -1,16 +1,3 @@
-/*
-type Config = Record<
-  string,
-  Record<
-    string,
-    string|Record<
-      string,
-      string
-    >
-  >
->;
-*/
-
 export const config = {
   styles: {
     RollButton:
@@ -22,6 +9,6 @@ export const config = {
     TopBar: {
       Box: "hidden gray-800",
       Title: "w-full h-fit my-4 mr-6 ml-8 py-6 font-extrabold text-4xl"
-    }  
+    }
   },
 };
