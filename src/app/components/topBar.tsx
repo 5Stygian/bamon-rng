@@ -1,7 +1,9 @@
+import { config } from "../config";
+
 export default function TopBar() {
   return (
-    <nav>
-      <h1>Bamon RNG</h1>
+    <nav className={config.styles.TobBar.Box}>
+      <h1 className={config.styles.TobBar.Title}>Bamon RNG</h1>
     </nav>
   );
 }
