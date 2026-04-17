@@ -7,8 +7,8 @@ export const config = {
       "max-w-xl m-auto p-6 font-bold border-2 rounded-xl border-violet-500 \
       bg-gradient-to-tr from-purple-600 to-violet-800",
     TopBar: {
-      Box: "hidden gray-800",
-      Title: "w-full h-fit my-4 mr-6 ml-8 py-6 font-extrabold text-4xl"
+      Box: "py-auto h-12",
+      Title: "w-fit mx-4 font-extrabold text-4xl"
     }
   },
 };
