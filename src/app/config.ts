@@ -1,3 +1,4 @@
+/*
 type Config = Record<
   string,
   Record<
@@ -8,8 +9,9 @@ type Config = Record<
     >
   >
 >;
+*/
 
-export const config: Config = {
+export const config = {
   styles: {
     RollButton:
       "block w-24 m-auto my-8 p-4 font-bold border-2 rounded-2xl border-black \
