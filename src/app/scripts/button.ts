@@ -6,20 +6,20 @@ const NumberAttributes: Record<string, Attribute> = {
   EVEN: ["EVEN", 200],
   ODD: ["ODD", 200],
   SQUARE: ["SQUARE", 99901],
-  SINGLE: ['SINGLE DIGIT', 10_000_000],
-  DOUBLE: ['TWO DIGITS', 1_111_112],
-  TRIPLE: ['THREE DIGITS', 111_112],
-  QUAD: ['FOUR DIGITS', 11_112],
-  QUINT: ['FIVE DIGITS', 1_112],
-  HEXA: ['SIX DIGITS', 112],
-  HEPT: ['SEVEN DIGITS', 100_000_000],
-  BLACKJACK: ['BLACKJACK', 2_522],
-  PAIR: ['PAIR', 249],
-  THREEK: ['THREE OF A KIND', 2_784],
-  FOURK: ['FOUR OF A KIND', 37_024],
-  FIVEK: ['YAHTZEE', 552_487],
-  SIXK: ['SIX OF A KIND', 10_000_000],
-  SEVENK: ['SEVEN OF A KIND', 0], // impossible on 0-1_000_000
+  SINGLE: ["SINGLE DIGIT", 10_000_000],
+  DOUBLE: ["TWO DIGITS", 1_111_112],
+  TRIPLE: ["THREE DIGITS", 111_112],
+  QUAD: ["FOUR DIGITS", 11_112],
+  QUINT: ["FIVE DIGITS", 1_112],
+  HEXA: ["SIX DIGITS", 112],
+  HEPT: ["SEVEN DIGITS", 100_000_000],
+  BLACKJACK: ["BLACKJACK", 2_522],
+  PAIR: ["PAIR", 249],
+  THREEK: ["THREE OF A KIND", 2_784],
+  FOURK: ["FOUR OF A KIND", 37_024],
+  FIVEK: ["YAHTZEE", 552_487],
+  SIXK: ["SIX OF A KIND", 10_000_000],
+  SEVENK: ["SEVEN OF A KIND", 0], // impossible on 0-1_000_000
   ASC2: ["2 ASC", 272],
   ASC3: ["3 ASC", 3467],
   ASC4: ["4 ASC", 53192],
@@ -32,13 +32,30 @@ const NumberAttributes: Record<string, Attribute> = {
   DSC5: ["5 DSC", 869566],
   DSC6: ["6 DSC", 20000000],
   DSC7: ["7 DSC", 0], // impossible on 0-1_000_000
+  REFERENCE: ["REFERENCE", 43],
+  BRAINROT: ["BRAINROT", 67],
+  FUNNYNUMBER: ["FUNNY NUMBER", 69],
+  BAKED: ["BAKED", 420],
+  DEVIL: ["DEVIL", 666],
+  BOOB: ["BOOB", 8008],
+  BOOBS: ["BOOBS", 80085],
+};
+
+const funnyNumbers: Record<number, string> = {
+  43: "43",
+  67: "67",
+  69: "69",
+  420: "420",
+  666: "666",
+  8008: "8008",
+  80085: "80085",
 };
 
 // EP = 100_000_000/(amount of numbers with that property)
 function _calculateEP(): void {
   const number: RandomNumber = new RandomNumber();
   for (let j = 0; j < Object.keys(NumberAttributes).length; j++) {
-    let jkey: string = Object.keys(NumberAttributes)[j];
+    const jkey: string = Object.keys(NumberAttributes)[j];
     let quantity: number = 0;
     for (let i = 0; i <= 1_000_000; i++) {
       number.value = i;
@@ -46,12 +63,13 @@ function _calculateEP(): void {
         quantity += 1;
       }
     }
-    console.log(NumberAttributes[jkey][0], Math.ceil(100_000_000/quantity));
+    console.log(NumberAttributes[jkey][0], Math.ceil(100_000_000 / quantity));
   }
 }
 
 class RandomNumber {
   public attributes: Array<Attribute>;
+
   private _value: number;
   private _digits: number;
   private _strvalue: string;
@@ -113,14 +131,18 @@ class RandomNumber {
         break;
     }
 
+    // check for ascending and descending subnumbers
     let ascCount: number = 0;
     let dscCount: number = 0;
     for (let i = 1; i < this._strvalue.length; i++) {
-      if (parseInt(this._strvalue[i], 10) - 1 === parseInt(this._strvalue[i-1],10)) {
+      if (
+        parseInt(this._strvalue[i], 10) - 1 ===
+        parseInt(this._strvalue[i - 1], 10)
+      ) {
         ascCount++;
         // move this into the else block if you don't want to get multiple ASC from one sequence
         switch (ascCount) {
-          case 1: 
+          case 1:
             this.addAttribute(NumberAttributes.ASC2);
             break;
           case 2:
@@ -143,11 +165,14 @@ class RandomNumber {
         ascCount = 0;
       }
 
-      if (parseInt(this._strvalue[i], 10) + 1 === parseInt(this._strvalue[i-1],10)) {
+      if (
+        parseInt(this._strvalue[i], 10) + 1 ===
+        parseInt(this._strvalue[i - 1], 10)
+      ) {
         dscCount++;
         // move this into the else block if you don't want to get multiple ASC from one sequence
         switch (dscCount) {
-          case 1: 
+          case 1:
             this.addAttribute(NumberAttributes.DSC2);
             break;
           case 2:
@@ -170,7 +195,8 @@ class RandomNumber {
         dscCount = 0;
       }
     }
-    
+
+    // check if the sum of the numbers is equal to 21
     let sum: number = 0;
     for (let i = 0; i < this._strvalue.length; i++) {
       sum += parseInt(this._strvalue[i], 10);
@@ -179,6 +205,7 @@ class RandomNumber {
       this.addAttribute(NumberAttributes.BLACKJACK);
     }
 
+    // check for consecutive numbers
     for (let i = 1; i < 7; i++) {
       //only consecutive
       if (new RegExp(`(.)(\\1{${i},})`).test(this._strvalue)) {
@@ -194,6 +221,29 @@ class RandomNumber {
         );
       }
 
+      // check for funny numbers
+      if (this.testForMatch(funnyNumbers[43])) {
+        this.addAttribute(NumberAttributes.REFERENCE);
+      }
+      if (this.testForMatch(funnyNumbers[67])) {
+        this.addAttribute(NumberAttributes.BRAINROT);
+      }
+      if (this.testForMatch(funnyNumbers[69])) {
+        this.addAttribute(NumberAttributes.FUNNYNUMBER);
+      }
+      if (this.testForMatch(funnyNumbers[420])) {
+        this.addAttribute(NumberAttributes.BAKED);
+      }
+      if (this.testForMatch(funnyNumbers[666])) {
+        this.addAttribute(NumberAttributes.DEVIL);
+      }
+      if (this.testForMatch(funnyNumbers[8008])) {
+        this.addAttribute(NumberAttributes.BOOB);
+      }
+      if (this.testForMatch(funnyNumbers[80085])) {
+        this.addAttribute(NumberAttributes.BOOBS);
+      }
+
       // not working
       // if ((new RegExp('(?:(.).*?(\\1).*?){'+ i + ',}')).test(num.toString())) {
       //     badges.push(i.toString());
@@ -205,6 +255,10 @@ class RandomNumber {
     if (!this.attributes.includes(attr)) {
       this.attributes.push(attr);
     }
+  }
+
+  private testForMatch(pattern: string): boolean {
+    return new RegExp(pattern).test(this._strvalue);
   }
 
   public getEP(): number {
