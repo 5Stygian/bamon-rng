@@ -305,18 +305,16 @@ class RandomNumber {
 }
 
 export default function roll() {
-  const numberDisplay = document.getElementById("NumberDisplay");
-  const attributeDisplay = document.getElementById("AttributeDisplay");
-  const epDisplay = document.getElementById("EPDisplay");
+  const numberDisplay = document.getElementById("NumberDisplay") as HTMLElement;
+  // biome-ignore format: Would make the code ugly if it was formatted
+  const attributeDisplay = document.getElementById("AttributeDisplay") as HTMLElement;
+  const epDisplay = document.getElementById("EPDisplay") as HTMLElement;
 
   const number: RandomNumber = new RandomNumber();
 
-  // biome-ignore lint/style/noNonNullAssertion: Lint not needed here
-  numberDisplay!.innerHTML = number.value as unknown as string;
-  // biome-ignore lint/style/noNonNullAssertion: Lint not needed here
-  attributeDisplay!.innerHTML = number.getAttrNamesAsFormattedString();
-  // biome-ignore lint/style/noNonNullAssertion: Lint not needed here
-  epDisplay!.innerHTML = number.getEP() as unknown as string;
+  numberDisplay.innerHTML = number.value as unknown as string;
+  attributeDisplay.innerHTML = number.getAttrNamesAsFormattedString();
+  epDisplay.innerHTML = number.getEP() as unknown as string;
 
   console.log(number.value, number.getAttrNames(), number.getEP());
 
