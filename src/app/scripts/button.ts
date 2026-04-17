@@ -26,6 +26,12 @@ const NumberAttributes: Record<string, Attribute> = {
   ASC5: ["5 ASC", 952381],
   ASC6: ["6 ASC", 25000000],
   ASC7: ["7 ASC", 0], // impossible on 0-1_000_000
+  DSC2: ["2 DSC", 266],
+  DSC3: ["3 DSC", 3352],
+  DSC4: ["4 DSC", 50506],
+  DSC5: ["5 DSC", 869566],
+  DSC6: ["6 DSC", 20000000],
+  DSC7: ["7 DSC", 0], // impossible on 0-1_000_000
 };
 
 // EP = 100_000_000/(amount of numbers with that property)
@@ -107,15 +113,13 @@ class RandomNumber {
         break;
     }
 
-    let count = 0;
-    let num = this._value.toString();
-    for (let i = 1; i < num.length; i++) {
-      if (parseInt(num[i], 10) - 1 === parseInt(num[i-1],10)) {
-        count++;
+    let ascCount: number = 0;
+    let dscCount: number = 0;
+    for (let i = 1; i < this._strvalue.length; i++) {
+      if (parseInt(this._strvalue[i], 10) - 1 === parseInt(this._strvalue[i-1],10)) {
+        ascCount++;
         // move this into the else block if you don't want to get multiple ASC from one sequence
-        switch (count) {
-          case 0:
-            break;
+        switch (ascCount) {
           case 1: 
             this.addAttribute(NumberAttributes.ASC2);
             break;
@@ -136,31 +140,35 @@ class RandomNumber {
             break;
         }
       } else {
-        count = 0;
+        ascCount = 0;
       }
-    }
 
-    switch (count) {
-      case 0:
-        break;
-      case 1: 
-        this.addAttribute(NumberAttributes.ASC2);
-        break;
-      case 2:
-        this.addAttribute(NumberAttributes.ASC3);
-        break;
-      case 3:
-        this.addAttribute(NumberAttributes.ASC4);
-        break;
-      case 4:
-        this.addAttribute(NumberAttributes.ASC5);
-        break;
-      case 5:
-        this.addAttribute(NumberAttributes.ASC6);
-        break;
-      case 6:
-        this.addAttribute(NumberAttributes.ASC7);
-        break;
+      if (parseInt(this._strvalue[i], 10) + 1 === parseInt(this._strvalue[i-1],10)) {
+        dscCount++;
+        // move this into the else block if you don't want to get multiple ASC from one sequence
+        switch (dscCount) {
+          case 1: 
+            this.addAttribute(NumberAttributes.DSC2);
+            break;
+          case 2:
+            this.addAttribute(NumberAttributes.DSC3);
+            break;
+          case 3:
+            this.addAttribute(NumberAttributes.DSC4);
+            break;
+          case 4:
+            this.addAttribute(NumberAttributes.DSC5);
+            break;
+          case 5:
+            this.addAttribute(NumberAttributes.DSC6);
+            break;
+          case 6:
+            this.addAttribute(NumberAttributes.DSC7);
+            break;
+        }
+      } else {
+        dscCount = 0;
+      }
     }
     
     let sum: number = 0;
