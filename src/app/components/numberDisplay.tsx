@@ -1,8 +1,8 @@
 export default function NumberDisplay() {
   return (
-    <div
+    <div 
       id="NumberDisplayOuter"
-      className="p-6 border-2 border-violet-500 rounded-xl"
+      className="w-1/2 m-auto p-6 border-2 border-violet-500 rounded-xl"
     >
       <div id="NumberDisplay">0</div>
       <div id="AttributeDisplay" />
