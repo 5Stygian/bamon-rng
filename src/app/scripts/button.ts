@@ -172,8 +172,8 @@ class RandomNumber {
     }
     
     let sum: number = 0;
-    for (let i = 0; i < this._value.toString().length; i++) {
-      sum += parseInt(this._value.toString()[i], 10);
+    for (let i = 0; i < this._strvalue.length; i++) {
+      sum += parseInt(this._strvalue[i], 10);
     }
     if (sum === 21) {
       this.addAttribute(NumberAttributes.BLACKJACK);
