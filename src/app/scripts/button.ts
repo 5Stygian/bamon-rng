@@ -311,9 +311,12 @@ export default function roll() {
 
   const number: RandomNumber = new RandomNumber();
 
-  numberDisplay!.innerHTML = number.value as any;
+  // biome-ignore lint/style/noNonNullAssertion: Lint not needed here
+  numberDisplay!.innerHTML = number.value as unknown as string;
+  // biome-ignore lint/style/noNonNullAssertion: Lint not needed here
   attributeDisplay!.innerHTML = number.getAttrNamesAsFormattedString();
-  epDisplay!.innerHTML = number.getEP() as any;
+  // biome-ignore lint/style/noNonNullAssertion: Lint not needed here
+  epDisplay!.innerHTML = number.getEP() as unknown as string;
 
   console.log(number.value, number.getAttrNames(), number.getEP());
 
