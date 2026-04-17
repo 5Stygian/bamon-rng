@@ -309,9 +309,10 @@ export default function roll() {
   // biome-ignore format: Would make the code ugly if it was formatted
   const attributeDisplay = document.getElementById("AttributeDisplay") as HTMLElement;
   const epDisplay = document.getElementById("EPDisplay") as HTMLElement;
+  const rollButton = document.getElementById("RollButton") as HTMLElement;
 
   const number: RandomNumber = new RandomNumber();
-
+  
   numberDisplay.innerHTML = number.value as unknown as string;
   attributeDisplay.innerHTML = number.getAttrNamesAsFormattedString();
   epDisplay.innerHTML = number.getEP() as unknown as string;
