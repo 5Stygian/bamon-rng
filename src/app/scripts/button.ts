@@ -41,16 +41,6 @@ const NumberAttributes: Record<string, Attribute> = {
   BOOBS: ["BOOBS", 80085],
 };
 
-const funnyNumbers: Record<number, string> = {
-  43: "43",
-  67: "67",
-  69: "69",
-  420: "420",
-  666: "666",
-  8008: "8008",
-  80085: "80085",
-};
-
 // EP = 100_000_000/(amount of numbers with that property)
 function _calculateEP(): void {
   const number: RandomNumber = new RandomNumber();
@@ -222,25 +212,25 @@ class RandomNumber {
       }
 
       // check for funny numbers
-      if (this.testForMatch(funnyNumbers[43])) {
+      if (this.testForMatch("43")) {
         this.addAttribute(NumberAttributes.REFERENCE);
       }
-      if (this.testForMatch(funnyNumbers[67])) {
+      if (this.testForMatch("67")) {
         this.addAttribute(NumberAttributes.BRAINROT);
       }
-      if (this.testForMatch(funnyNumbers[69])) {
+      if (this.testForMatch("69")) {
         this.addAttribute(NumberAttributes.FUNNYNUMBER);
       }
-      if (this.testForMatch(funnyNumbers[420])) {
+      if (this.testForMatch("420")) {
         this.addAttribute(NumberAttributes.BAKED);
       }
-      if (this.testForMatch(funnyNumbers[666])) {
+      if (this.testForMatch("666")) {
         this.addAttribute(NumberAttributes.DEVIL);
       }
-      if (this.testForMatch(funnyNumbers[8008])) {
+      if (this.testForMatch("8008")) {
         this.addAttribute(NumberAttributes.BOOB);
       }
-      if (this.testForMatch(funnyNumbers[80085])) {
+      if (this.testForMatch("80085")) {
         this.addAttribute(NumberAttributes.BOOBS);
       }
 
