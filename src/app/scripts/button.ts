@@ -2,10 +2,10 @@
 
 type Attribute = [string, number];
 const NumberAttributes: Record<string, Attribute> = {
-  CUBE: ["CUBE", 990100],
+  CUBE: ["CUBE", 990_100],
   EVEN: ["EVEN", 200],
   ODD: ["ODD", 200],
-  SQUARE: ["SQUARE", 99901],
+  SQUARE: ["SQUARE", 99_901],
   SINGLE: ["SINGLE DIGIT", 10_000_000],
   DOUBLE: ["TWO DIGITS", 1_111_112],
   TRIPLE: ["THREE DIGITS", 111_112],
@@ -21,24 +21,24 @@ const NumberAttributes: Record<string, Attribute> = {
   SIXK: ["SIX OF A KIND", 10_000_000],
   SEVENK: ["SEVEN OF A KIND", 0], // impossible on 0-1_000_000
   ASC2: ["2 ASC", 272],
-  ASC3: ["3 ASC", 3467],
-  ASC4: ["4 ASC", 53192],
-  ASC5: ["5 ASC", 952381],
-  ASC6: ["6 ASC", 25000000],
+  ASC3: ["3 ASC", 3_467],
+  ASC4: ["4 ASC", 531_92],
+  ASC5: ["5 ASC", 952_381],
+  ASC6: ["6 ASC", 25_000_000],
   ASC7: ["7 ASC", 0], // impossible on 0-1_000_000
   DSC2: ["2 DSC", 266],
-  DSC3: ["3 DSC", 3352],
-  DSC4: ["4 DSC", 50506],
-  DSC5: ["5 DSC", 869566],
-  DSC6: ["6 DSC", 20000000],
+  DSC3: ["3 DSC", 3_352],
+  DSC4: ["4 DSC", 50_506],
+  DSC5: ["5 DSC", 869_566],
+  DSC6: ["6 DSC", 20_000_000],
   DSC7: ["7 DSC", 0], // impossible on 0-1_000_000
-  REFERENCE: ["REFERENCE", 43],
-  BRAINROT: ["BRAINROT", 67],
-  FUNNYNUMBER: ["FUNNY NUMBER", 69],
-  BAKED: ["BAKED", 420],
-  DEVIL: ["DEVIL", 666],
-  BOOB: ["BOOB", 8008],
-  BOOBS: ["BOOBS", 80085],
+  REFERENCE: ["REFERENCE", 2_025],
+  BRAINROT: ["BRAINROT", 2_025],
+  FUNNYNUMBER: ["FUNNY NUMBER", 2_025],
+  BAKED: ["BAKED", 25_007],
+  DEVIL: ["DEVIL", 27_028],
+  BOOB: ["BOOB", 333_334],
+  BOOBS: ["BOOBS", 5_000_000],
 };
 
 // EP = 100_000_000/(amount of numbers with that property)
@@ -308,6 +308,8 @@ export default function roll() {
   epDisplay.innerHTML = number.getEP() as unknown as string;
 
   console.log(number.value, number.getAttrNames(), number.getEP());
+
+  _calculateEP();
 
   // for (let i of [1,10,100,1000,10000,100000,1000000]) {
   //   number.value = i;
