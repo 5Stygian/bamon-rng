@@ -64,154 +64,161 @@ class RandomNumber {
   private _digits: number;
   private _strvalue: string;
 
-  constructor() {
-    this._value = Math.round(Math.random() * 1000000);
-    this._strvalue = this._value.toString();
-    this._digits = this._strvalue.length;
-
-    this.attributes = [];
-
-    this.checkForAttributes();
-  }
-
-  private checkForAttributes(): void {
+  // i am cooking
+  private attributeChecks: Array<() => void> = [
     // check if this.value is even or odd
-    if (this.value % 2) {
-      this.addAttribute(NumberAttributes.ODD);
-    } else {
-      this.addAttribute(NumberAttributes.EVEN);
-    }
+    () => {
+      if (this.value % 2) {
+        this.addAttribute(NumberAttributes.ODD);
+      } else {
+        this.addAttribute(NumberAttributes.EVEN);
+      }
+    },
 
     // check if this.value is a square
-    if (
-      Math.floor(Math.sqrt(this.value)) === Math.ceil(Math.sqrt(this.value))
-    ) {
-      this.addAttribute(NumberAttributes.SQUARE);
-    }
+    () => {
+      if (
+        Math.floor(Math.sqrt(this.value)) === Math.ceil(Math.sqrt(this.value))
+      ) {
+        this.addAttribute(NumberAttributes.SQUARE);
+      }
+    },
 
     // check if this.value is a cube
-    if (
-      Math.floor(Math.cbrt(this.value)) === Math.ceil(Math.cbrt(this.value))
-    ) {
-      this.addAttribute(NumberAttributes.CUBE);
-    }
+    () => {
+      if (
+        Math.floor(Math.cbrt(this.value)) === Math.ceil(Math.cbrt(this.value))
+      ) {
+        this.addAttribute(NumberAttributes.CUBE);
+      }
+    },
 
     // check the amount of digits
-    switch (this._digits) {
-      case 1:
-        this.addAttribute(NumberAttributes.SINGLE);
-        break;
-      case 2:
-        this.addAttribute(NumberAttributes.DOUBLE);
-        break;
-      case 3:
-        this.addAttribute(NumberAttributes.TRIPLE);
-        break;
-      case 4:
-        this.addAttribute(NumberAttributes.QUAD);
-        break;
-      case 5:
-        this.addAttribute(NumberAttributes.QUINT);
-        break;
-      case 6:
-        this.addAttribute(NumberAttributes.HEXA);
-        break;
-      case 7:
-        this.addAttribute(NumberAttributes.HEPT);
-        break;
-    }
+    () => {
+      switch (this._digits) {
+        case 1:
+          this.addAttribute(NumberAttributes.SINGLE);
+          break;
+        case 2:
+          this.addAttribute(NumberAttributes.DOUBLE);
+          break;
+        case 3:
+          this.addAttribute(NumberAttributes.TRIPLE);
+          break;
+        case 4:
+          this.addAttribute(NumberAttributes.QUAD);
+          break;
+        case 5:
+          this.addAttribute(NumberAttributes.QUINT);
+          break;
+        case 6:
+          this.addAttribute(NumberAttributes.HEXA);
+          break;
+        case 7:
+          this.addAttribute(NumberAttributes.HEPT);
+          break;
+      }
+    },
 
     // check for ascending and descending subnumbers
-    let ascCount: number = 0;
-    let dscCount: number = 0;
-    for (let i = 1; i < this._strvalue.length; i++) {
-      if (
-        parseInt(this._strvalue[i], 10) - 1 ===
-        parseInt(this._strvalue[i - 1], 10)
-      ) {
-        ascCount++;
-        // move this into the else block if you don't want to get multiple ASC from one sequence
-        switch (ascCount) {
-          case 1:
-            this.addAttribute(NumberAttributes.ASC2);
-            break;
-          case 2:
-            this.addAttribute(NumberAttributes.ASC3);
-            break;
-          case 3:
-            this.addAttribute(NumberAttributes.ASC4);
-            break;
-          case 4:
-            this.addAttribute(NumberAttributes.ASC5);
-            break;
-          case 5:
-            this.addAttribute(NumberAttributes.ASC6);
-            break;
-          case 6:
-            this.addAttribute(NumberAttributes.ASC7);
-            break;
+    () => {
+      let ascCount: number = 0;
+      let dscCount: number = 0;
+      for (let i = 1; i < this._strvalue.length; i++) {
+        if (
+          parseInt(this._strvalue[i], 10) - 1 ===
+          parseInt(this._strvalue[i - 1], 10)
+        ) {
+          ascCount++;
+          // move this into the else block if you don't want to get multiple ASC from one sequence
+          switch (ascCount) {
+            case 1:
+              this.addAttribute(NumberAttributes.ASC2);
+              break;
+            case 2:
+              this.addAttribute(NumberAttributes.ASC3);
+              break;
+            case 3:
+              this.addAttribute(NumberAttributes.ASC4);
+              break;
+            case 4:
+              this.addAttribute(NumberAttributes.ASC5);
+              break;
+            case 5:
+              this.addAttribute(NumberAttributes.ASC6);
+              break;
+            case 6:
+              this.addAttribute(NumberAttributes.ASC7);
+              break;
+          }
+        } else {
+          ascCount = 0;
         }
-      } else {
-        ascCount = 0;
-      }
 
-      if (
-        parseInt(this._strvalue[i], 10) + 1 ===
-        parseInt(this._strvalue[i - 1], 10)
-      ) {
-        dscCount++;
-        // move this into the else block if you don't want to get multiple ASC from one sequence
-        switch (dscCount) {
-          case 1:
-            this.addAttribute(NumberAttributes.DSC2);
-            break;
-          case 2:
-            this.addAttribute(NumberAttributes.DSC3);
-            break;
-          case 3:
-            this.addAttribute(NumberAttributes.DSC4);
-            break;
-          case 4:
-            this.addAttribute(NumberAttributes.DSC5);
-            break;
-          case 5:
-            this.addAttribute(NumberAttributes.DSC6);
-            break;
-          case 6:
-            this.addAttribute(NumberAttributes.DSC7);
-            break;
+        if (
+          parseInt(this._strvalue[i], 10) + 1 ===
+          parseInt(this._strvalue[i - 1], 10)
+        ) {
+          dscCount++;
+          // move this into the else block if you don't want to get multiple ASC from one sequence
+          switch (dscCount) {
+            case 1:
+              this.addAttribute(NumberAttributes.DSC2);
+              break;
+            case 2:
+              this.addAttribute(NumberAttributes.DSC3);
+              break;
+            case 3:
+              this.addAttribute(NumberAttributes.DSC4);
+              break;
+            case 4:
+              this.addAttribute(NumberAttributes.DSC5);
+              break;
+            case 5:
+              this.addAttribute(NumberAttributes.DSC6);
+              break;
+            case 6:
+              this.addAttribute(NumberAttributes.DSC7);
+              break;
+          }
+        } else {
+          dscCount = 0;
         }
-      } else {
-        dscCount = 0;
       }
-    }
+    },
 
     // check if the sum of the numbers is equal to 21
-    let sum: number = 0;
-    for (let i = 0; i < this._strvalue.length; i++) {
-      sum += parseInt(this._strvalue[i], 10);
-    }
-    if (sum === 21) {
-      this.addAttribute(NumberAttributes.BLACKJACK);
-    }
+    () => {
+      let sum: number = 0;
+      for (let i = 0; i < this._strvalue.length; i++) {
+        sum += parseInt(this._strvalue[i], 10);
+      }
+      if (sum === 21) {
+        this.addAttribute(NumberAttributes.BLACKJACK);
+      }
+    },
 
     // check for consecutive numbers
-    for (let i = 1; i < 7; i++) {
-      //only consecutive
-      if (this.testForMatch(`(.)(\\1{${i},})`)) {
-        this.addAttribute(
-          [
-            NumberAttributes.PAIR,
-            NumberAttributes.THREEK,
-            NumberAttributes.FOURK,
-            NumberAttributes.FIVEK,
-            NumberAttributes.SIXK,
-            NumberAttributes.SEVENK,
-          ][i - 1],
-        );
+    () => {
+      for (let i = 1; i < 7; i++) {
+        //only consecutive
+        if (this.testForMatch(`(.)(\\1{${i},})`)) {
+          this.addAttribute(
+            [
+              NumberAttributes.PAIR,
+              NumberAttributes.THREEK,
+              NumberAttributes.FOURK,
+              NumberAttributes.FIVEK,
+              NumberAttributes.SIXK,
+              NumberAttributes.SEVENK,
+            ][i - 1],
+          );
+        }
       }
+    },
 
-      // check for funny numbers
+    // check for funny numbers
+    () => {
       if (this.testForMatch("43")) {
         this.addAttribute(NumberAttributes.REFERENCE);
       }
@@ -233,12 +240,21 @@ class RandomNumber {
       if (this.testForMatch("80085")) {
         this.addAttribute(NumberAttributes.BOOBS);
       }
+    },
+  ];
 
-      // not working
-      // if ((new RegExp('(?:(.).*?(\\1).*?){'+ i + ',}')).test(num.toString())) {
-      //     badges.push(i.toString());
-      // }
-    }
+  constructor() {
+    this._value = Math.round(Math.random() * 1000000);
+    this._strvalue = this._value.toString();
+    this._digits = this._strvalue.length;
+
+    this.attributes = [];
+
+    this.checkForAttributes();
+  }
+
+  private checkForAttributes(): void {
+    for (const attributeCheck of this.attributeChecks) attributeCheck();
   }
 
   private addAttribute(attr: Attribute): void {
