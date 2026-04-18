@@ -299,7 +299,7 @@ export default function roll() {
   // biome-ignore format: Would make the code ugly if it was formatted
   const attributeDisplay = document.getElementById("AttributeDisplay") as HTMLElement;
   const epDisplay = document.getElementById("EPDisplay") as HTMLElement;
-  const rollButton = document.getElementById("RollButton") as HTMLElement;
+  const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
 
   const number: RandomNumber = new RandomNumber();
 
@@ -314,12 +314,22 @@ export default function roll() {
   //   console.log(number.value, number.attributes);
   // }
 
-  if (rollButton.style.rotate === "360deg") rollButton.style.rotate = "0deg";
-  else rollButton.style.rotate = "360deg";
+  // code button roll button code roll not scale though thats something else.
+  // this just makes roll button roll
+  rollButton.style.rotate = "360deg";
+  rollButton.disabled = true;
+  new Promise<void>((resolve) => {
+    setTimeout(() => {
+      rollButton.style.transitionDuration = "0ms";
+      rollButton.style.rotate = "";
 
-  rollButton.addEventListener("transitionend", () => {
-    rollButton.style.transitionDuration = "";
-    rollButton.style.rotate = "";
+      setTimeout(() => {
+        rollButton.style.transitionDuration = "";
+        rollButton.disabled = false;
+      }, 10);
+
+      resolve();
+    }, 400);
   });
 }
 
