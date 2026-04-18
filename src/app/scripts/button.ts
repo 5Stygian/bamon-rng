@@ -43,6 +43,7 @@ const NumberAttributes: Record<string, Attribute> = {
   BOOBS: ["BOOBS", 5_000_000],
   BROTHER: ["BIG BROTHER", 333_334],
   YEAR: ["YEAR", 25_007],
+  L33T: ["L33T", 333_334],
   SEMICLEAN: ["SEMI-CLEAN", 1_000],
   DECADE: ["DECADE", 1_000],
   CENTURY: ["CENTURY", 10_000],
@@ -254,6 +255,9 @@ class RandomNumber {
       }
       if (this.testForMatch("365")) {
         this.addAttribute(NumberAttributes.YEAR);
+      }
+      if (this.testForMatch("1337")) {
+        this.addAttribute(NumberAttributes.L33T);
       }
     },
 
