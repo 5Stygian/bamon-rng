@@ -8,7 +8,9 @@ export default function RollButton() {
     <button
       id="RollButton"
       className={config.styles.RollButton}
-      onClick={roll}
+      onClick={() => {
+        roll();
+      }} // this way the MouseEventHandler is not passed into roll
       type="button"
     >
       ROLL

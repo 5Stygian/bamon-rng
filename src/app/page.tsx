@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import * as c from "./components/index";
-import { _calculateEP } from "./scripts/button";
 import { config } from "./config";
+import { _calculateEP, _rollNumber } from "./scripts/devFunctions";
 
 declare global {
   interface Window {
@@ -15,9 +15,10 @@ export default function Index() {
   useEffect(() => {
     if (config.settings.noprod.enableDevFunctions) {
       window.developerFunctions = {
-        _calculateEP
+        _calculateEP,
+        _rollNumber,
       };
-      console.log('AVAILABLE DEV FUNCTIONS: \n', window.developerFunctions);
+      console.log("AVAILABLE DEV FUNCTIONS: \n", window.developerFunctions);
     }
 
     // makes the radial gradient that follows the mouse

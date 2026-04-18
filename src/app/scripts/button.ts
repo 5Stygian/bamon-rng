@@ -1,9 +1,7 @@
 "use client";
 
-import { config } from "../config";
-
 type Attribute = [string, number];
-const NumberAttributes: Record<string, Attribute> = {
+export const NumberAttributes: Record<string, Attribute> = {
   CUBE: ["CUBE", 990_100],
   EVEN: ["EVEN", 200],
   ODD: ["ODD", 200],
@@ -51,23 +49,7 @@ const NumberAttributes: Record<string, Attribute> = {
   SEMIEPOCH: ["SEMIEPOCH", 1_000_000],
 };
 
-// EP = 100_000_000/(amount of numbers with that property)
-export function _calculateEP(startindex: number = 0, endbuffer: number = 0): void {
-  const number: RandomNumber = new RandomNumber();
-  for (let j = startindex; j < Object.keys(NumberAttributes).length - endbuffer; j++) {
-    const jkey: string = Object.keys(NumberAttributes)[j];
-    let quantity: number = 0;
-    for (let i = 0; i <= 1_000_000; i++) {
-      number.value = i;
-      if (number.getAttrNames().includes(NumberAttributes[jkey][0])) {
-        quantity += 1;
-      }
-    }
-    console.log(NumberAttributes[jkey][0], Math.ceil(100_000_000 / quantity));
-  }
-}
-
-class RandomNumber {
+export class RandomNumber {
   public attributes: Array<Attribute>;
 
   private _value: number;
@@ -250,8 +232,12 @@ class RandomNumber {
     },
   ];
 
-  constructor() {
-    this._value = Math.round(Math.random() * 1000000);
+  constructor(number: number = -1) {
+    if (number === -1) {
+      this._value = Math.round(Math.random() * 1000000);
+    } else {
+      this._value = number;
+    }
     this._strvalue = this._value.toString();
     this._digits = this._strvalue.length;
 
@@ -327,7 +313,7 @@ class RandomNumber {
   }
 }
 
-export default function roll() {
+export default function roll(devNumber: number = -1) {
   // biome-ignore format: Would make the code ugly if it was formatted
   const numberDisplay = document.getElementById("NumberDisplay") as HTMLDivElement;
   // biome-ignore format: Would make the code ugly if it was formatted
@@ -336,7 +322,13 @@ export default function roll() {
   const epDisplayParent = epDisplay.parentElement as HTMLDivElement;
   const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
 
-  const number: RandomNumber = new RandomNumber();
+  let number: RandomNumber;
+
+  if (devNumber === -1) {
+    number = new RandomNumber();
+  } else {
+    number = new RandomNumber(devNumber);
+  }
 
   console.log(number.value, number.attributes, number.getEP());
 
