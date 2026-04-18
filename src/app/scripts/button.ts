@@ -292,6 +292,14 @@ class RandomNumber {
 
     this.checkForAttributes();
   }
+
+  get length(): number {
+    return this._digits;
+  }
+
+  get strvalue(): string {
+    return this._strvalue;
+  }
 }
 
 export default function roll() {
@@ -303,34 +311,59 @@ export default function roll() {
 
   const number: RandomNumber = new RandomNumber();
 
-  numberDisplay.innerHTML = number.value as unknown as string;
-  attributeDisplay.innerHTML = number.getAttrNamesAsFormattedString();
-  epDisplay.innerHTML = number.getEP() as unknown as string;
-
   console.log(number.value, number.getAttrNames(), number.getEP());
 
-  // for (let i of [1,10,100,1000,10000,100000,1000000]) {
-  //   number.value = i;
-  //   console.log(number.value, number.attributes);
-  // }
-
-  // code button roll button code roll not scale though thats something else.
+  // code button roll button code roll and scale now though its also something else.
   // this just makes roll button roll
-  rollButton.style.rotate = "360deg";
+  rollButton.style.width = "6rem"; // squishes button
+  numberDisplay.innerHTML = "?".repeat(number.length);
+  (epDisplay.parentElement as HTMLElement).style.opacity = "0";
   rollButton.disabled = true;
+
+  new Promise<void>((resolve) => {
+    for (let i = 0; i < number.length; i++) {
+      setTimeout(
+        () => {
+          numberDisplay.innerText =
+            numberDisplay.innerText.substring(0, i) +
+            number.strvalue[i] +
+            numberDisplay.innerText.substring(i + 1);
+          if (i === number.length - 1) {
+            resolve();
+          }
+        },
+        300 * (i + 1),
+      );
+    }
+  });
+
   new Promise<void>((resolve) => {
     setTimeout(() => {
-      rollButton.style.transitionDuration = "0ms";
-      rollButton.style.rotate = "";
+      // rotates button 4x
+      rollButton.style.transitionDuration = "1600ms";
+      rollButton.style.rotate = "1440deg";
 
       setTimeout(() => {
-        rollButton.style.transitionDuration = "";
-        rollButton.disabled = false;
-      }, 10);
+        // instantly changes rotation back to default
+        rollButton.style.transitionDuration = "0ms";
+        rollButton.style.rotate = "";
 
-      resolve();
+        setTimeout(() => {
+          // sets transition duration baack to default after changing rotation
+          rollButton.style.transitionDuration = "";
+          resolve();
+        }, 10);
+      }, 1600);
     }, 400);
+  }).then(() => {
+    // makes button unsquished
+    rollButton.style.width = "";
+
+    numberDisplay.innerHTML = number.value as unknown as string;
+    attributeDisplay.innerHTML = number.getAttrNamesAsFormattedString();
+    epDisplay.innerHTML = number.getEP() as unknown as string;
+    (epDisplay.parentElement as HTMLElement).style.opacity = "100%";
+
+    rollButton.disabled = false;
   });
 }
-
-//roll();
