@@ -6,7 +6,7 @@ import * as c from "./components/index";
 export default function Index() {
   useEffect(() => {
     // makes the radial gradient that follows the mouse
-    const rollButton = document.getElementById("RollButton") as HTMLElement;
+    const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
     function getMousePos(event: MouseEvent): void {
       const x = event.clientX;
       const y = event.clientY;

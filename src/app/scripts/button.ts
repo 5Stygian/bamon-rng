@@ -321,10 +321,11 @@ class RandomNumber {
 }
 
 export default function roll() {
-  const numberDisplay = document.getElementById("NumberDisplay") as HTMLElement;
+  const numberDisplay = document.getElementById("NumberDisplay") as HTMLDivElement;
   // biome-ignore format: Would make the code ugly if it was formatted
-  const attributeDisplay = document.getElementById("AttributeDisplay") as HTMLElement;
-  const epDisplay = document.getElementById("EPDisplay") as HTMLElement;
+  const attributeDisplay = document.getElementById("AttributeDisplay") as HTMLDivElement;
+  const epDisplay = document.getElementById("EPDisplay") as HTMLSpanElement;
+  const epDisplayParent = epDisplay.parentElement as HTMLDivElement;
   const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
 
   const number: RandomNumber = new RandomNumber();
@@ -335,7 +336,7 @@ export default function roll() {
   // this just makes roll button roll
   rollButton.style.width = "6rem"; // squishes button
   numberDisplay.innerHTML = "?".repeat(number.length);
-  (epDisplay.parentElement as HTMLElement).style.opacity = "0";
+  epDisplayParent.style.opacity = "0";
   rollButton.disabled = true;
 
   new Promise<void>((resolve) => {
@@ -380,7 +381,7 @@ export default function roll() {
     numberDisplay.innerHTML = number.value as unknown as string;
     attributeDisplay.innerHTML = number.getAttrNamesAsFormattedString();
     epDisplay.innerHTML = number.getEP() as unknown as string;
-    (epDisplay.parentElement as HTMLElement).style.opacity = "100%";
+    epDisplayParent.style.opacity = "100%";
 
     rollButton.disabled = false;
   });
