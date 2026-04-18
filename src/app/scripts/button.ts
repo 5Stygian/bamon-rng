@@ -212,18 +212,17 @@ class RandomNumber {
     () => {
       for (let i = 1; i < 7; i++) {
         //only consecutive
-        if (this.testForMatch(`(.)(\\1{${i},})`)) {
-          this.addAttribute(
-            [
-              NumberAttributes.PAIR,
-              NumberAttributes.THREEK,
-              NumberAttributes.FOURK,
-              NumberAttributes.FIVEK,
-              NumberAttributes.SIXK,
-              NumberAttributes.SEVENK,
-            ][i - 1],
-          );
-        }
+        this.testForAttribute(
+          `(.)(\\1{${i},})`,
+          [
+            NumberAttributes.PAIR,
+            NumberAttributes.THREEK,
+            NumberAttributes.FOURK,
+            NumberAttributes.FIVEK,
+            NumberAttributes.SIXK,
+            NumberAttributes.SEVENK,
+          ][i - 1],
+        );
       }
     },
 
@@ -267,11 +266,6 @@ class RandomNumber {
 
   private addAttribute(attr: Attribute): void {
     if (!this.attributes.includes(attr)) this.attributes.push(attr);
-  }
-
-  /** Syntactic sugar for comparing this._strvalue with a regex expression. */
-  private testForMatch(pattern: string | RegExp): boolean {
-    return new RegExp(pattern).test(this._strvalue);
   }
 
   /** Compares this._strvalue to a regex expression and adds an attribute if it returns true. */

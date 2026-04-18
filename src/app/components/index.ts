@@ -1,7 +1,7 @@
-import RollButton from "./button";
 import AttributeDisplay from "./attributesDisplay";
-import TopBar from "./topBar";
-import NumberDisplay from "./numberDisplay";
+import RollButton from "./button";
 import EPDisplay from "./EPDisplay";
+import NumberDisplay from "./numberDisplay";
+import TopBar from "./topBar";
 
-export { RollButton, AttributeDisplay, TopBar, NumberDisplay, EPDisplay };
+export { AttributeDisplay, EPDisplay, NumberDisplay, RollButton, TopBar };
