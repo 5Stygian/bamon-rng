@@ -229,55 +229,25 @@ class RandomNumber {
 
     // check for funny numbers
     () => {
-      if (this.testForMatch("43")) {
-        this.addAttribute(NumberAttributes.REFERENCE);
-      }
-      if (this.testForMatch("67")) {
-        this.addAttribute(NumberAttributes.BRAINROT);
-      }
-      if (this.testForMatch("69")) {
-        this.addAttribute(NumberAttributes.FUNNYNUMBER);
-      }
-      if (this.testForMatch("365")) {
-        this.addAttribute(NumberAttributes.YEAR);
-      }
-      if (this.testForMatch("420")) {
-        this.addAttribute(NumberAttributes.BAKED);
-      }
-      if (this.testForMatch("666")) {
-        this.addAttribute(NumberAttributes.DEVIL);
-      }
-      if (this.testForMatch("1337")) {
-        this.addAttribute(NumberAttributes.L33T);
-      }
-      if (this.testForMatch("1984")) {
-        this.addAttribute(NumberAttributes.BROTHER);
-      }
-      if (this.testForMatch("8008")) {
-        this.addAttribute(NumberAttributes.BOOB);
-      }
-      if (this.testForMatch("80085")) {
-        this.addAttribute(NumberAttributes.BOOBS);
-      }
+      this.testForAttribute("43", NumberAttributes.REFERENCE);
+      this.testForAttribute("67", NumberAttributes.BRAINROT);
+      this.testForAttribute("69", NumberAttributes.FUNNYNUMBER);
+      this.testForAttribute("365", NumberAttributes.YEAR);
+      this.testForAttribute("420", NumberAttributes.BAKED);
+      this.testForAttribute("666", NumberAttributes.DEVIL);
+      this.testForAttribute("1337", NumberAttributes.L33T);
+      this.testForAttribute("1984", NumberAttributes.BROTHER);
+      this.testForAttribute("8008", NumberAttributes.BOOB);
+      this.testForAttribute("80085", NumberAttributes.BOOBS);
     },
 
     // check for number endings
     () => {
-      if (this.testForMatch("5$")) {
-        this.addAttribute(NumberAttributes.SEMICLEAN);
-      }
-      if (this.testForMatch("0$")) {
-        this.addAttribute(NumberAttributes.DECADE);
-      }
-      if (this.testForMatch("00$")) {
-        this.addAttribute(NumberAttributes.CENTURY);
-      }
-      if (this.testForMatch("000$")) {
-        this.addAttribute(NumberAttributes.MILLENNIUM);
-      }
-      if (this.testForMatch("5000$")) {
-        this.addAttribute(NumberAttributes.SEMIEPOCH);
-      }
+      this.testForAttribute("5$", NumberAttributes.SEMICLEAN);
+      this.testForAttribute("0$", NumberAttributes.DECADE);
+      this.testForAttribute("00$", NumberAttributes.CENTURY);
+      this.testForAttribute("000$", NumberAttributes.MILLENNIUM);
+      this.testForAttribute("5000$", NumberAttributes.SEMIEPOCH);
     },
   ];
 
@@ -296,13 +266,20 @@ class RandomNumber {
   }
 
   private addAttribute(attr: Attribute): void {
-    if (!this.attributes.includes(attr)) {
-      this.attributes.push(attr);
-    }
+    if (!this.attributes.includes(attr)) this.attributes.push(attr);
   }
 
+  /** Syntactic sugar for comparing this._strvalue with a regex expression. */
   private testForMatch(pattern: string | RegExp): boolean {
     return new RegExp(pattern).test(this._strvalue);
+  }
+
+  /** Compares this._strvalue to a regex expression and adds an attribute if it returns true. */
+  private testForAttribute(
+    pattern: string | RegExp,
+    attribute: Attribute,
+  ): void {
+    if (new RegExp(pattern).test(this._strvalue)) this.addAttribute(attribute);
   }
 
   public getEP(): number {
