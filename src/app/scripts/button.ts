@@ -238,26 +238,26 @@ class RandomNumber {
       if (this.testForMatch("69")) {
         this.addAttribute(NumberAttributes.FUNNYNUMBER);
       }
+      if (this.testForMatch("365")) {
+        this.addAttribute(NumberAttributes.YEAR);
+      }
       if (this.testForMatch("420")) {
         this.addAttribute(NumberAttributes.BAKED);
       }
       if (this.testForMatch("666")) {
         this.addAttribute(NumberAttributes.DEVIL);
       }
+      if (this.testForMatch("1337")) {
+        this.addAttribute(NumberAttributes.L33T);
+      }
+      if (this.testForMatch("1984")) {
+        this.addAttribute(NumberAttributes.BROTHER);
+      }
       if (this.testForMatch("8008")) {
         this.addAttribute(NumberAttributes.BOOB);
       }
       if (this.testForMatch("80085")) {
         this.addAttribute(NumberAttributes.BOOBS);
-      }
-      if (this.testForMatch("1984")) {
-        this.addAttribute(NumberAttributes.BROTHER);
-      }
-      if (this.testForMatch("365")) {
-        this.addAttribute(NumberAttributes.YEAR);
-      }
-      if (this.testForMatch("1337")) {
-        this.addAttribute(NumberAttributes.L33T);
       }
     },
 
@@ -367,7 +367,7 @@ export default function roll() {
 
   const number: RandomNumber = new RandomNumber();
 
-  console.log(number.value, number.getAttrNames(), number.getEP());
+  console.log(number.value, number.attributes, number.getEP());
 
   // code button roll button code roll and scale now though its also something else.
   // this just makes roll button roll
