@@ -1,4 +1,8 @@
 export const config = {
+  development: {
+    // NOTE: do not push to prod with this set to true
+    enableCalculateEP: false
+  },
   styles: {
     RollButton:
       "block w-36 m-auto my-8 p-4 font-bold border-2 rounded-2xl border-black \

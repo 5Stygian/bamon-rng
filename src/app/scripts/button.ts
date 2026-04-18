@@ -1,5 +1,7 @@
 "use client";
 
+import { config } from "../config";
+
 type Attribute = [string, number];
 const NumberAttributes: Record<string, Attribute> = {
   CUBE: ["CUBE", 990_100],
@@ -382,4 +384,6 @@ export default function roll() {
 
     rollButton.disabled = false;
   });
+
+  if (config.development.enableCalculateEP) _calculateEP();
 }
