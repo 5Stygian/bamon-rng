@@ -198,7 +198,7 @@ class RandomNumber {
     // check for consecutive numbers
     for (let i = 1; i < 7; i++) {
       //only consecutive
-      if (new RegExp(`(.)(\\1{${i},})`).test(this._strvalue)) {
+      if (this.testForMatch(`(.)(\\1{${i},})`)) {
         this.addAttribute(
           [
             NumberAttributes.PAIR,
@@ -247,7 +247,7 @@ class RandomNumber {
     }
   }
 
-  private testForMatch(pattern: string): boolean {
+  private testForMatch(pattern: string | RegExp): boolean {
     return new RegExp(pattern).test(this._strvalue);
   }
 
