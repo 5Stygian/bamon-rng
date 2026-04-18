@@ -41,6 +41,13 @@ const NumberAttributes: Record<string, Attribute> = {
   DEVIL: ["DEVIL", 27_028],
   BOOB: ["BOOB", 333_334],
   BOOBS: ["BOOBS", 5_000_000],
+  BROTHER: ["BIG BROTHER", 333_334],
+  YEAR: ["YEAR", 25_007],
+  SEMICLEAN: ["SEMI-CLEAN", 1_000],
+  DECADE: ["DECADE", 1_000],
+  CENTURY: ["CENTURY", 10_000],
+  MILLENNIUM: ["MILLENNIUM", 100_000],
+  SEMIEPOCH: ["SEMIEPOCH", 1_000_000],
 };
 
 // EP = 100_000_000/(amount of numbers with that property)
@@ -241,6 +248,31 @@ class RandomNumber {
       }
       if (this.testForMatch("80085")) {
         this.addAttribute(NumberAttributes.BOOBS);
+      }
+      if (this.testForMatch("1984")) {
+        this.addAttribute(NumberAttributes.BROTHER);
+      }
+      if (this.testForMatch("365")) {
+        this.addAttribute(NumberAttributes.YEAR);
+      }
+    },
+
+    // check for number endings
+    () => {
+      if (this.testForMatch("5$")) {
+        this.addAttribute(NumberAttributes.SEMICLEAN);
+      }
+      if (this.testForMatch("0$")) {
+        this.addAttribute(NumberAttributes.DECADE);
+      }
+      if (this.testForMatch("00$")) {
+        this.addAttribute(NumberAttributes.CENTURY);
+      }
+      if (this.testForMatch("000$")) {
+        this.addAttribute(NumberAttributes.MILLENNIUM);
+      }
+      if (this.testForMatch("5000$")) {
+        this.addAttribute(NumberAttributes.SEMIEPOCH);
       }
     },
   ];
