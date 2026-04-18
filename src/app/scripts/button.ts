@@ -323,6 +323,14 @@ export default function roll() {
   //   number.value = i;
   //   console.log(number.value, number.attributes);
   // }
+
+  if (rollButton.style.rotate === "360deg") rollButton.style.rotate = "0deg";
+  else rollButton.style.rotate = "360deg";
+
+  rollButton.addEventListener("transitionend", () => {
+    rollButton.style.transitionDuration = "";
+    rollButton.style.rotate = "";
+  });
 }
 
 //roll();
