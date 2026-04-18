@@ -2,9 +2,24 @@
 
 import { useEffect } from "react";
 import * as c from "./components/index";
+import { _calculateEP } from "./scripts/button";
+import { config } from "./config";
+
+declare global {
+  interface Window {
+    developerFunctions: object;
+  }
+}
 
 export default function Index() {
   useEffect(() => {
+    if (config.settings.noprod.enableDevFunctions) {
+      window.developerFunctions = {
+        _calculateEP
+      };
+      console.log('AVAILABLE DEV FUNCTIONS: \n', window.developerFunctions);
+    }
+
     // makes the radial gradient that follows the mouse
     // biome-ignore format: Would make the code ugly if it was formatted
     const rollButton = document.getElementById("RollButton") as HTMLButtonElement;

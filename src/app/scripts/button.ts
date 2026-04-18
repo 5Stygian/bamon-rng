@@ -52,9 +52,9 @@ const NumberAttributes: Record<string, Attribute> = {
 };
 
 // EP = 100_000_000/(amount of numbers with that property)
-function _calculateEP(): void {
+export function _calculateEP(startindex: number = 0, endbuffer: number = 0): void {
   const number: RandomNumber = new RandomNumber();
-  for (let j = 0; j < Object.keys(NumberAttributes).length; j++) {
+  for (let j = startindex; j < Object.keys(NumberAttributes).length - endbuffer; j++) {
     const jkey: string = Object.keys(NumberAttributes)[j];
     let quantity: number = 0;
     for (let i = 0; i <= 1_000_000; i++) {
@@ -379,7 +379,7 @@ export default function roll() {
           // sets transition duration baack to default after changing rotation
           rollButton.style.transitionDuration = "";
           resolve();
-        }, 10);
+        }, 40);
       }, 1600);
     }, 400);
   }).then(() => {
@@ -393,6 +393,4 @@ export default function roll() {
 
     rollButton.disabled = false;
   });
-
-  if (config.settings.noprod.enableCalculateEP) _calculateEP();
 }

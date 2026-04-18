@@ -2,7 +2,7 @@ export const config = {
   settings: {
     /** Do NOT push to prod with these set to true. */
     noprod: {
-      enableCalculateEP: false,
+      enableDevFunctions: false,
     },
   },
   styles: {
