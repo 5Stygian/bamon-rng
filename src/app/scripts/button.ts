@@ -309,8 +309,6 @@ export default function roll() {
 
   console.log(number.value, number.getAttrNames(), number.getEP());
 
-  _calculateEP();
-
   // for (let i of [1,10,100,1000,10000,100000,1000000]) {
   //   number.value = i;
   //   console.log(number.value, number.attributes);
