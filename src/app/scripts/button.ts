@@ -67,7 +67,7 @@ class RandomNumber {
   private _strvalue: string;
 
   // i am cooking
-  private attributeChecks: Array<() => void> = [
+  private attributeChecks: (() => void)[] = [
     // check if this.value is even or odd
     () => {
       if (this.value % 2) {
