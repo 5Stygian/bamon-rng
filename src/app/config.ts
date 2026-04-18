@@ -1,7 +1,9 @@
 export const config = {
-  development: {
-    // NOTE: do not push to prod with this set to true
-    enableCalculateEP: false,
+  settings: {
+    /** Do NOT push to prod with these set to true */
+    noprod: {
+      enableCalculateEP: false,
+    },
   },
   styles: {
     RollButton:

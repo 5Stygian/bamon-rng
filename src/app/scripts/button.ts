@@ -423,5 +423,5 @@ export default function roll() {
     rollButton.disabled = false;
   });
 
-  if (config.development.enableCalculateEP) _calculateEP();
+  if (config.settings.noprod.enableCalculateEP) _calculateEP();
 }
