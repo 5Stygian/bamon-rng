@@ -6,6 +6,7 @@ import * as c from "./components/index";
 export default function Index() {
   useEffect(() => {
     // makes the radial gradient that follows the mouse
+    // biome-ignore format: Would make the code ugly if it was formatted
     const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
     function getMousePos(event: MouseEvent): void {
       const x = event.clientX;

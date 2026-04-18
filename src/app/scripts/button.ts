@@ -321,6 +321,7 @@ class RandomNumber {
 }
 
 export default function roll() {
+  // biome-ignore format: Would make the code ugly if it was formatted
   const numberDisplay = document.getElementById("NumberDisplay") as HTMLDivElement;
   // biome-ignore format: Would make the code ugly if it was formatted
   const attributeDisplay = document.getElementById("AttributeDisplay") as HTMLDivElement;
