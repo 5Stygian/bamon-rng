@@ -302,7 +302,7 @@ export default function roll() {
   const rollButton = document.getElementById("RollButton") as HTMLElement;
 
   const number: RandomNumber = new RandomNumber();
-  
+
   numberDisplay.innerHTML = number.value as unknown as string;
   attributeDisplay.innerHTML = number.getAttrNamesAsFormattedString();
   epDisplay.innerHTML = number.getEP() as unknown as string;

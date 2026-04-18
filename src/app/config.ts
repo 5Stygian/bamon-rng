@@ -11,7 +11,7 @@ export const config = {
       hover:cursor-default",
     TopBar: {
       Box: "py-auto h-12",
-      Title: "w-fit mx-4 font-extrabold text-4xl"
-    }
+      Title: "w-fit mx-4 font-extrabold text-4xl",
+    },
   },
 };
