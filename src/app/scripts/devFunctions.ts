@@ -5,6 +5,10 @@ export function _calculateEP(
   startindex: number = 0,
   endbuffer: number = 0,
 ): void {
+  if (startindex >= Object.keys(NumberAttributes).length) {
+    console.log(Object.keys(NumberAttributes).length);
+    return;
+  }
   const number: RandomNumber = new RandomNumber();
   for (
     let j = startindex;

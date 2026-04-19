@@ -47,6 +47,31 @@ export const NumberAttributes: Record<string, Attribute> = {
   CENTURY: ["CENTURY", 10_000],
   MILLENNIUM: ["MILLENNIUM", 100_000],
   SEMIEPOCH: ["SEMIEPOCH", 1_000_000],
+  MOUNTAIN: ["MOUNTAIN", 3_922],
+  ASCENDING: ["ASCENDING", 214_593],
+  DESCENDING: ["DESCENDING", 118_064],
+  NC2: ["PAIR (NC)", 139],
+  NC3: ["THREE OF A KIND (NC)", 725],
+  NC4: ["FOUR OF A KIND (NC)", 8_812],
+  NC5: ["FIVE OF A KIND (NC)", 202_021],
+  NC6: ["SIX OF A KIND (NC)", 10_000_000],
+  NC7: ["SEVEN OF A KIND (NC)", 0], // impossible on 0-1_000_000
+  V0: ["VOID 0", 168],
+  V1: ["VOID 1", 249],
+  V2: ["VOID 2", 1_278],
+  V3: ["VOID 3", 12_427],
+  V4: ["VOID 4", 235_850],
+  V5: ["VOID 5", 10_000_000],
+  V6: ["VOID 6", 100_000_000],
+  HYDROGEN: ["HYDROGEN", 283],
+  HELIUM: ["HELIUM", 283],
+  LITHIUM: ["LITHIUM", 283],
+  BERYLLIUM: ["BERYLLIUM", 283],
+  BORON: ["BORON", 283],
+  CARBON: ["CARBON", 283],
+  NITROGEN: ["NITROGEN", 283],
+  OXYGEN: ["OXYGEN", 283],
+  FLOURINE: ["FLOURINE", 283],
 };
 
 export class RandomNumber {
@@ -193,7 +218,6 @@ export class RandomNumber {
     // check for consecutive numbers
     () => {
       for (let i = 1; i < 7; i++) {
-        //only consecutive
         this.testForAttribute(
           `(.)(\\1{${i},})`,
           [
@@ -206,6 +230,84 @@ export class RandomNumber {
           ][i - 1],
         );
       }
+    },
+
+    // working with counts of digits
+    () => {
+      const digitCount: Record<string, number> = {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+      };
+      for (const letter of this._strvalue) {
+        digitCount[letter] += 1;
+      }
+
+      // amounts of each number (NC is noncontinuous)
+      for (const key of Object.keys(digitCount)) {
+        switch (digitCount[key]) {
+          case 2:
+            this.addAttribute(NumberAttributes.NC2);
+            break;
+          case 3:
+            this.addAttribute(NumberAttributes.NC3);
+            break;
+          case 4:
+            this.addAttribute(NumberAttributes.NC4);
+            break;
+          case 5:
+            this.addAttribute(NumberAttributes.NC5);
+            break;
+          case 6:
+            this.addAttribute(NumberAttributes.NC6);
+            break;
+          case 7:
+            this.addAttribute(NumberAttributes.NC7);
+            break;
+        }
+      }
+
+      // zero count
+      switch (digitCount["0"]) {
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
+        case 6:
+          this.addAttribute(NumberAttributes.V6);
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
+        case 5:
+          this.addAttribute(NumberAttributes.V5);
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
+        case 4:
+          this.addAttribute(NumberAttributes.V4);
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
+        case 3:
+          this.addAttribute(NumberAttributes.V3);
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
+        case 2:
+          this.addAttribute(NumberAttributes.V2);
+        case 1:
+          this.addAttribute(NumberAttributes.V1);
+          break;
+        case 0:
+          this.addAttribute(NumberAttributes.V0);
+          break;
+      }
+
+      if (digitCount["1"] === 1) this.addAttribute(NumberAttributes.HYDROGEN);
+      if (digitCount["2"] === 1) this.addAttribute(NumberAttributes.HELIUM);
+      if (digitCount["3"] === 1) this.addAttribute(NumberAttributes.LITHIUM);
+      if (digitCount["4"] === 1) this.addAttribute(NumberAttributes.BERYLLIUM);
+      if (digitCount["5"] === 1) this.addAttribute(NumberAttributes.BORON);
+      if (digitCount["6"] === 1) this.addAttribute(NumberAttributes.CARBON);
+      if (digitCount["7"] === 1) this.addAttribute(NumberAttributes.NITROGEN);
+      if (digitCount["8"] === 1) this.addAttribute(NumberAttributes.OXYGEN);
+      if (digitCount["9"] === 1) this.addAttribute(NumberAttributes.FLOURINE);
     },
 
     // check for funny numbers
@@ -229,6 +331,22 @@ export class RandomNumber {
       this.testForAttribute("00$", NumberAttributes.CENTURY);
       this.testForAttribute("000$", NumberAttributes.MILLENNIUM);
       this.testForAttribute("5000$", NumberAttributes.SEMIEPOCH);
+    },
+
+    // check for digits being greater/less than the last
+    () => {
+      this.testForAttribute(
+        "^0?1?2?3?4?5?6?7?8?9?9?8?7?6?5?4?3?2?1?0?$",
+        NumberAttributes.MOUNTAIN,
+      );
+      this.testForAttribute(
+        "^0?1?2?3?4?5?6?7?8?9?$",
+        NumberAttributes.ASCENDING,
+      );
+      this.testForAttribute(
+        "^9?8?7?6?5?4?3?2?1?0?$",
+        NumberAttributes.DESCENDING,
+      );
     },
   ];
 
