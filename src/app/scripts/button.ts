@@ -1,7 +1,8 @@
 "use client";
 
 type Attribute = [string, number];
-export const NumberAttributes: Record<string, Attribute> = {
+type Attributes = Record<string, Attribute>;
+export const NumberAttributes: Attributes = {
   CUBE: ["CUBE", 990_100],
   EVEN: ["EVEN", 200],
   ODD: ["ODD", 200],
@@ -437,14 +438,6 @@ export class RandomNumber {
 }
 
 export default function roll(devNumber: number = -1) {
-  // biome-ignore format: Would make the code ugly if it was formatted
-  const numberDisplay = document.getElementById("NumberDisplay") as HTMLDivElement;
-  // biome-ignore format: Would make the code ugly if it was formatted
-  const attributeDisplay = document.getElementById("AttributeDisplay") as HTMLDivElement;
-  const epDisplay = document.getElementById("EPDisplay") as HTMLSpanElement;
-  const epDisplayParent = epDisplay.parentElement as HTMLDivElement;
-  const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
-
   let number: RandomNumber;
 
   if (devNumber === -1) {
@@ -452,6 +445,14 @@ export default function roll(devNumber: number = -1) {
   } else {
     number = new RandomNumber(devNumber);
   }
+  
+  // biome-ignore format: Would make the code ugly if it was formatted
+  const numberDisplay = document.getElementById("NumberDisplay") as HTMLDivElement;
+  // biome-ignore format: Would make the code ugly if it was formatted
+  const attributeDisplay = document.getElementById("AttributeDisplay") as HTMLDivElement;
+  const epDisplay = document.getElementById("EPDisplay") as HTMLSpanElement;
+  const epDisplayParent = epDisplay.parentElement as HTMLDivElement;
+  const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
 
   console.log(number.value, number.attributes, number.getEP());
 
