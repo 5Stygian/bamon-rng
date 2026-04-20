@@ -7,7 +7,7 @@ import { _calculateEP, _rollNumber } from "./scripts/devFunctions";
 
 declare global {
   interface Window {
-    developerFunctions: object;
+    DeveloperFunctions: object;
   }
 }
 
