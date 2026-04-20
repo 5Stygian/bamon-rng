@@ -14,7 +14,7 @@ declare global {
 export default function Index() {
   useEffect(() => {
     if (config.settings.noprod.enableDevFunctions) {
-      window.developerFunctions = {
+      window.DeveloperFunctions = {
         _calculateEP,
         _rollNumber,
       };
