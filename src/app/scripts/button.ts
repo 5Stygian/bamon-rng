@@ -274,6 +274,10 @@ export class RandomNumber {
         }
       }
 
+      // zero count (but better)
+      this.addAttribute(NumberAttributes[`V${digitCount["0"]}`]);
+
+      /*
       // zero count
       switch (digitCount["0"]) {
         // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
@@ -298,6 +302,7 @@ export class RandomNumber {
           this.addAttribute(NumberAttributes.V0);
           break;
       }
+      */
 
       if (digitCount["1"] === 1) this.addAttribute(NumberAttributes.HYDROGEN);
       if (digitCount["2"] === 1) this.addAttribute(NumberAttributes.HELIUM);
