@@ -18,7 +18,7 @@ export default function Index() {
         _calculateEP,
         _rollNumber,
       };
-      console.log("AVAILABLE DEV FUNCTIONS: \n", window.developerFunctions);
+      console.log("AVAILABLE DEV FUNCTIONS: \n", window.DeveloperFunctions);
     }
 
     // makes the radial gradient that follows the mouse
