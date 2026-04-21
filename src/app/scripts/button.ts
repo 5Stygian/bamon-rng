@@ -275,36 +275,11 @@ export class RandomNumber {
         }
       }
 
-      // zero count (but better)
-      this.addAttribute(NumberAttributes[`V${digitCount["0"]}`]);
 
-      /*
-      // zero count
-      switch (digitCount["0"]) {
-        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
-        case 6:
-          this.addAttribute(NumberAttributes.V6);
-        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
-        case 5:
-          this.addAttribute(NumberAttributes.V5);
-        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
-        case 4:
-          this.addAttribute(NumberAttributes.V4);
-        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
-        case 3:
-          this.addAttribute(NumberAttributes.V3);
-        // biome-ignore lint/suspicious/noFallthroughSwitchClause: falls through
-        case 2:
-          this.addAttribute(NumberAttributes.V2);
-        case 1:
-          this.addAttribute(NumberAttributes.V1);
-          break;
-        case 0:
-          this.addAttribute(NumberAttributes.V0);
-          break;
+      for (let i = 0; i <= digitCount["0]; i++) {
+        this.addAttribute(NumberAttributes[`V${i}`]);
       }
-      */
-
+           
       if (digitCount["1"] === 1) this.addAttribute(NumberAttributes.HYDROGEN);
       if (digitCount["2"] === 1) this.addAttribute(NumberAttributes.HELIUM);
       if (digitCount["3"] === 1) this.addAttribute(NumberAttributes.LITHIUM);
