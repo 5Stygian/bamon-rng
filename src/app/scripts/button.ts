@@ -275,10 +275,11 @@ export class RandomNumber {
         }
       }
 
-
-      for (let i = 0; i <= digitCount["0]; i++) {
+      // 0 count
+      for (let i = 1; i <= digitCount["0"]; i++) {
         this.addAttribute(NumberAttributes[`V${i}`]);
       }
+      if (digitCount["0"] === 0) this.addAttribute(NumberAttributes["V0"]);
            
       if (digitCount["1"] === 1) this.addAttribute(NumberAttributes.HYDROGEN);
       if (digitCount["2"] === 1) this.addAttribute(NumberAttributes.HELIUM);
