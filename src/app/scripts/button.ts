@@ -77,14 +77,7 @@ export const NumberAttributes: Attributes = {
 
 export class RandomNumber {
   public attributes: Array<Attribute>;
-  public rollComplete = new CustomEvent(
-    "rollComplete",
-    {
-      detail:
-        this.attributes
-    }
-  );
-
+  
   private _value: number;
   private _digits: number;
   private _strvalue: string;
@@ -353,6 +346,14 @@ export class RandomNumber {
     this.checkForAttributes();
   }
 
+  public rollComplete = new CustomEvent(
+    "rollComplete",
+    {
+      detail:
+        this.attributes
+    }
+  );
+  
   private checkForAttributes(): void {
     for (const attributeCheck of this.attributeChecks) attributeCheck();
   }
