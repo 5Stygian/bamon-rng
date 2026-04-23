@@ -77,13 +77,13 @@ export const NumberAttributes: Attributes = {
 
 export class RandomNumber {
   public attributes: Array<Attribute>;
-  public rollComplete = new CustomEvent(
+  /*public rollComplete = new CustomEvent(
     "rollComplete",
     {
       detail:
         this.attributes
     }
-  );
+  );*/
 
   private _value: number;
   private _digits: number;
@@ -439,9 +439,9 @@ export default function roll(devNumber: number = -1) {
   const epDisplayParent = epDisplay.parentElement as HTMLDivElement;
   const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
 
-  attributeDisplay.addEventListener("rollComplete", (e: CustomEventInit<Array<Attribute>>) => {
+  /*attributeDisplay.addEventListener("rollComplete", (e: CustomEventInit<Array<Attribute>>) => {
     console.log(`sigma sigma boy: ${e.detail}`);
-  });
+  });*/
   
   // code button roll button code roll and scale now though its also something else.
   // this just makes roll button roll
@@ -496,6 +496,6 @@ export default function roll(devNumber: number = -1) {
 
     rollButton.disabled = false;
 
-    number.dispatchEvent("rollComplete");
+    //number.dispatchEvent("rollComplete");
   });
 }
