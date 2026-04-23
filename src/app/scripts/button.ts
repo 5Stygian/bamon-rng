@@ -77,6 +77,13 @@ export const NumberAttributes: Attributes = {
 
 export class RandomNumber {
   public attributes: Array<Attribute>;
+  public rollComplete = new CustomEvent(
+    "rollComplete",
+    {
+      detail:
+        this.attributes
+    }
+  );
 
   private _value: number;
   private _digits: number;
@@ -421,6 +428,8 @@ export default function roll(devNumber: number = -1) {
   } else {
     number = new RandomNumber(devNumber);
   }
+
+  console.log(number.value, number.attributes, number.getEP());
   
   // biome-ignore format: Would make the code ugly if it was formatted
   const numberDisplay = document.getElementById("NumberDisplay") as HTMLDivElement;
@@ -430,8 +439,10 @@ export default function roll(devNumber: number = -1) {
   const epDisplayParent = epDisplay.parentElement as HTMLDivElement;
   const rollButton = document.getElementById("RollButton") as HTMLButtonElement;
 
-  console.log(number.value, number.attributes, number.getEP());
-
+  attributeDisplay.addEventListener("rollComplete", (e: CustomEventInit<Array<Attribute>>) => {
+    console.log(`sigma sigma boy: ${e.detail}`);
+  });
+  
   // code button roll button code roll and scale now though its also something else.
   // this just makes roll button roll
   rollButton.style.width = "6rem"; // squishes button
@@ -484,5 +495,7 @@ export default function roll(devNumber: number = -1) {
     epDisplayParent.style.opacity = "100%";
 
     rollButton.disabled = false;
+
+    number.dispatchEvent("rollComplete");
   });
 }
