@@ -471,7 +471,7 @@ export default function roll(devNumber: number = -1) {
     setTimeout(() => {
       // rotates button 4x
       rollButton.style.transitionDuration = "1600ms";
-      rollButton.style.rotate = "1440deg";
+      rollButton.style.rotate = "2520deg";
 
       setTimeout(() => {
         // instantly changes rotation back to default
